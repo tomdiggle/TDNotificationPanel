@@ -21,9 +21,9 @@ To display a notification panel use the following method:
 
 ```
 [TDNotificationPanel showNotificationPanelInView:self.view
-												 type:TDNotificationTypeError
-                                              	title:@"Error Notification"
-									   hideAfterDelay:3];
+											type:TDNotificationTypeError
+										   title:@"Error Notification"
+								  hideAfterDelay:3];
 ```
 
 There are 3 different notification types these are:
