@@ -19,10 +19,12 @@ Add the following source files `TDNotificationPanel.h` and `TDNotificationPanel.
 ## Usage
 To display a notification panel use the following method:
 
-```[TDNotificationPanel showNotificationPanelInView:self.view
+```
+[TDNotificationPanel showNotificationPanelInView:self.view
 												 type:TDNotificationTypeError
                                               	title:@"Error Notification"
-									   hideAfterDelay:3];```
+									   hideAfterDelay:3];
+```
 
 There are 3 different notification types these are:
 
