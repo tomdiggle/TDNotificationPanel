@@ -2,8 +2,8 @@
 TDNotificationPanel is a drop in class that displays a notification panel with a label.
 
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.png)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success)
+[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info.png)
+[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.png)
 
 ## Requirements
 TDNotification has been tested on iOS 6+ and is compatible with ARC projects. It depends on the following Apple frameworks:
