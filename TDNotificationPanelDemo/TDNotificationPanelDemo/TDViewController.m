@@ -49,4 +49,19 @@
                                       hideAfterDelay:3];
 }
 
+- (IBAction)displayLongTaskNotificationButtonTapped:(id)sender
+{
+    TDNotificationPanel *panel = [TDNotificationPanel showNotificationPanelInView:self.view
+                                                                         animated:YES];
+    [panel setTitleText:@"Long Task"];
+    [panel setNotificationType:TDNotificationTypeSuccess];
+    
+    double delayInSeconds = 5.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [TDNotificationPanel hideNotificationPanelInView:self.view
+                                                animated:YES];
+    });
+}
+
 @end
