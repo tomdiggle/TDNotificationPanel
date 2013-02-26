@@ -45,7 +45,7 @@ typedef enum {
 
 /**
  * A short message to be displayed. If the text is too long it will get clipped by displaying "..." at the end. 
- * If set to nil then no title is set.
+ * If set to nil then no title is displayed.
  */
 @property (nonatomic, copy) NSString *titleText;
 
@@ -67,5 +67,27 @@ typedef enum {
  * @see TDNotificationType
  */
 + (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title hideAfterDelay:(double)delay;
+
+/**
+ * Creates a new notification panel, adds it to the view provided and shows it.
+ *
+ * @param view The view that the notification panel will be added to.
+ * @param animated If set to YES the notification panel will be shown and hidden using an animation. If set to NO, no animation will be used.
+ *
+ * @return A reference to the created notification panel.
+ */
++ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view animated:(BOOL)animated;
+
+/**
+ * Hides the top-most notification panel.
+ *
+ * @param view The view that the notification panel will be removed from.
+ * @param animated If set to YES the notification panel will be shown and hidden using an animation. If set to NO, no animation will be used.
+ * 
+ * @return YES if notification panel is hidden, NO otherwise.
+ *
+ * @see showNotificationPanelInView:animated:
+ */
++ (BOOL)hideNotificationPanelInView:(UIView *)view animated:(BOOL)animated;
 
 @end

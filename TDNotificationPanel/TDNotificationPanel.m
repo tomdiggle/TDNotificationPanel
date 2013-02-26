@@ -44,13 +44,47 @@ static const CGFloat kTitleFontSize = 14.f;
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
     [panel setNotificationType:type];
     [panel setTitleText:title];
-    
     [view addSubview:panel];
-    
     [panel show:YES];
     [panel hide:YES afterDelay:delay];
     
     return panel;
+}
+
++ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view animated:(BOOL)animated
+{
+    TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
+    [view addSubview:panel];
+    [panel show:animated];
+    
+    return panel;
+}
+
++ (BOOL)hideNotificationPanelInView:(UIView *)view animated:(BOOL)animated
+{
+    TDNotificationPanel *panel = [TDNotificationPanel notificationPanelForView:view];
+    if (panel)
+    {
+        [panel hide:animated];
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
++ (TDNotificationPanel *)notificationPanelForView:(UIView *)view
+{
+    NSEnumerator *subviews = [[view subviews] reverseObjectEnumerator];
+    for (UIView *view in subviews)
+    {
+        if ([view isKindOfClass:[TDNotificationPanel class]])
+        {
+            return (TDNotificationPanel *)view;
+        }
+    }
+    
+    return nil;
 }
 
 #pragma mark - Initializers
