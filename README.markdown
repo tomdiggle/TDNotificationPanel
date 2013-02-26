@@ -17,6 +17,12 @@ TDNotification has been tested on iOS 6+ and is compatible with ARC projects. It
 Add the following source files `TDNotificationPanel.h` and `TDNotificationPanel.m` located in `TDNotificationPanel` directory to your project. Then include TDNotificationPanel wherever you need it with `#import "TDNotificationPanel.h"`.
 
 ## Usage
+There are 3 different notification types these are:
+
+- TDNotificationTypeError
+- TDNotificationTypeInfo
+- TDNotificationTypeSuccess
+
 To display a notification panel use the following method:
 
 ```
@@ -26,11 +32,22 @@ To display a notification panel use the following method:
 								  hideAfterDelay:3];
 ```
 
-There are 3 different notification types these are:
+If you need to run a long task use the following method:
 
-- TDNotificationTypeError
-- TDNotificationTypeInfo
-- TDNotificationTypeSuccess
+```
+TDNotificationPanel *panel = [TDNotificationPanel showNotificationPanelInView:self.view
+                                                                     animated:YES];
+[panel setTitleText:@"Long Task"];
+[panel setNotificationType:TDNotificationTypeSuccess];
+
+[self longRunningTaskWithProgress:^(float)progress {
+
+} completion:^{
+	[TDNotificationPanel hideNotificationPanelInView:self.view
+                                            animated:YES];
+}];
+
+```
 
 ## License
 
