@@ -90,4 +90,13 @@ typedef enum {
  */
 + (BOOL)hideNotificationPanelInView:(UIView *)view animated:(BOOL)animated;
 
+/**
+ * Returns an array of notification panels for the view provided.
+ *
+ * @param view The view in which to check for notification panels.
+ *
+ * @return An array of notification panels for the view provided, or nil if none exists.
+ */
++ (NSArray *)notificationPanelsForView:(UIView *)view;
+
 @end

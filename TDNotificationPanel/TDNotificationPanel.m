@@ -87,6 +87,20 @@ static const CGFloat kTitleFontSize = 14.f;
     return nil;
 }
 
++ (NSArray *)notificationPanelsForView:(UIView *)view
+{
+    NSMutableArray *notificationPanels = [NSMutableArray array];
+    NSArray *subview = [view subviews];
+    [subview enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[TDNotificationPanel class]])
+        {
+            [notificationPanels addObject:obj];
+        }
+    }];
+    
+    return notificationPanels;
+}
+
 #pragma mark - Initializers
 
 - (id)initWithView:(UIView *)view
