@@ -274,6 +274,34 @@ static const CGFloat kTitleFontSize = 14.f;
 
 - (void)layoutSubviews
 {
+    CGPoint position = CGPointZero;
+    
+    if ([[self superview] isKindOfClass:[UIWindow class]])
+    {
+        if (![UIApplication sharedApplication].statusBarHidden)
+        {
+            // Position under the status bar.
+            position.y = [UIApplication sharedApplication].statusBarFrame.size.height;
+        }
+        
+        UIWindow *parent = (UIWindow *)self.superview;
+        if ([[parent rootViewController] isKindOfClass:[UINavigationController class]])
+        {
+            UINavigationController *navigationController = (UINavigationController *)parent.rootViewController;
+            if (!navigationController.navigationBarHidden)
+            {
+                // Position under the navigation controller's navigation bar.
+                position.y += navigationController.navigationBar.frame.size.height;
+            }
+            
+            // Display the view under the navigation controller's navigation bar so the animation's appear
+            // below the navigation bar and the panel can persist accross views.
+            [self removeFromSuperview];
+            [[navigationController view] insertSubview:self
+                                          belowSubview:navigationController.navigationBar];
+        }
+    }
+
     // Determine the total width & height needed
     CGSize totalSize = CGSizeZero;
     totalSize.width = self.bounds.size.width;
@@ -292,8 +320,8 @@ static const CGFloat kTitleFontSize = 14.f;
     title.origin.x = roundf((self.bounds.size.width - titleSize.width) / 2);
     title.size = titleSize;
     _title.frame = title;
-    
-    self.frame = CGRectMake(0.f, 0.f, totalSize.width, totalSize.height);
+
+    self.frame = CGRectMake(position.x, position.y, totalSize.width, totalSize.height);
 }
 
 - (void)drawRect:(CGRect)rect

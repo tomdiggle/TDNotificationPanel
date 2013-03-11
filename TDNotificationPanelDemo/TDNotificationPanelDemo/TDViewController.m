@@ -64,4 +64,12 @@
     });
 }
 
+- (IBAction)persistentNotificationButtonTapped:(id)sender
+{
+    [TDNotificationPanel showNotificationPanelInView:self.view.window
+                                                type:TDNotificationTypeInfo
+                                               title:@"Persistent Notification"
+                                      hideAfterDelay:6];
+}
+
 @end
