@@ -156,6 +156,16 @@ static const CGFloat kTitleFontSize = 14.f;
 
 - (void)show:(BOOL)animated
 {
+    NSArray *subviews = [[self superview] subviews];
+    for (id view in [subviews reverseObjectEnumerator])
+    {
+        if ([view isKindOfClass:[TDNotificationPanel class]] && ![view isEqual:self])
+        {
+            // If a notification panel is already displaying hide it before showing the new one.
+            [view hide:YES];
+        }
+    }
+    
     if (animated)
     {
         CATransition *transition = [CATransition animation];
