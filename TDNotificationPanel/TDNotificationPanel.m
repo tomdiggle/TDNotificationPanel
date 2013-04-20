@@ -205,11 +205,7 @@ static const CGFloat kTitleFontSize = 14.f;
 
 - (void)hide:(BOOL)animated afterDelay:(double)delay
 {
-    double delayInSeconds = delay;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        [self hide:animated];
-    });
+    [self performSelector:@selector(hide:) withObject:@(animated) afterDelay:delay];
 }
 
 #pragma mark - KVO
@@ -277,6 +273,8 @@ static const CGFloat kTitleFontSize = 14.f;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    
     [self hide:YES];
 }
 
