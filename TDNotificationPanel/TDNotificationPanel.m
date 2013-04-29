@@ -78,7 +78,7 @@ static const CGFloat kTitleFontSize = 14.f;
     NSEnumerator *subviews = [[view subviews] reverseObjectEnumerator];
     for (UIView *view in subviews)
     {
-        if ([view isKindOfClass:[TDNotificationPanel class]])
+        if ([view isKindOfClass:NSClassFromString(@"TDNotificationPanel")])
         {
             return (TDNotificationPanel *)view;
         }
@@ -92,7 +92,7 @@ static const CGFloat kTitleFontSize = 14.f;
     NSMutableArray *notificationPanels = [NSMutableArray array];
     NSArray *subview = [view subviews];
     [subview enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:[TDNotificationPanel class]])
+        if ([obj isKindOfClass:NSClassFromString(@"TDNotificationPanel")])
         {
             [notificationPanels addObject:obj];
         }
@@ -159,7 +159,7 @@ static const CGFloat kTitleFontSize = 14.f;
     NSArray *subviews = [[self superview] subviews];
     for (id view in [subviews reverseObjectEnumerator])
     {
-        if ([view isKindOfClass:[TDNotificationPanel class]] && ![view isEqual:self])
+        if ([view isKindOfClass:NSClassFromString(@"TDNotificationPanel")] && ![view isEqual:self])
         {
             // If a notification panel is already displaying hide it before showing the new one.
             [view hide:YES];
@@ -284,7 +284,7 @@ static const CGFloat kTitleFontSize = 14.f;
 {
     CGPoint position = CGPointZero;
     
-    if ([[self superview] isKindOfClass:[UIWindow class]])
+    if ([[self superview] isKindOfClass:NSClassFromString(@"UIWindow")])
     {
         if (![UIApplication sharedApplication].statusBarHidden)
         {
@@ -293,7 +293,7 @@ static const CGFloat kTitleFontSize = 14.f;
         }
         
         UIWindow *parent = (UIWindow *)self.superview;
-        if ([[parent rootViewController] isKindOfClass:[UINavigationController class]])
+        if ([[parent rootViewController] isKindOfClass:NSClassFromString(@"UINavigationController")])
         {
             UINavigationController *navigationController = (UINavigationController *)parent.rootViewController;
             if (!navigationController.navigationBarHidden)
