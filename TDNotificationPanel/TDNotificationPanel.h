@@ -66,7 +66,7 @@ typedef enum {
  *
  * @see TDNotificationType
  */
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title hideAfterDelay:(double)delay;
++ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title hideAfterDelay:(NSTimeInterval)delay;
 
 /**
  * Creates a new notification panel, adds it to the view provided and shows it.

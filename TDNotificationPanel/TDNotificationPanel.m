@@ -39,7 +39,7 @@ static const CGFloat kTitleFontSize = 14.f;
 
 #pragma mark - Class Methods
 
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title hideAfterDelay:(double)delay
++ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title hideAfterDelay:(NSTimeInterval)delay
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
     [panel setNotificationType:type];
@@ -191,8 +191,7 @@ static const CGFloat kTitleFontSize = 14.f;
         [[self layer] addAnimation:transition forKey:nil];
         [self setFrame:CGRectMake(0.f, -self.frame.size.height, self.frame.size.width, self.frame.size.height)];
         
-        double delayInSeconds = 0.33;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.33 * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
             [self removeFromSuperview];
         });
@@ -203,7 +202,7 @@ static const CGFloat kTitleFontSize = 14.f;
     }
 }
 
-- (void)hide:(BOOL)animated afterDelay:(double)delay
+- (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay
 {
     [self performSelector:@selector(hide:) withObject:@(animated) afterDelay:delay];
 }
