@@ -25,6 +25,9 @@
 
 #import "TDNotificationPanel.h"
 
+#import <CoreGraphics/CoreGraphics.h>
+#import <QuartzCore/QuartzCore.h>
+
 static const CGFloat kPadding = 14.f;
 static const CGFloat kTitleFontSize = 14.f;
 
