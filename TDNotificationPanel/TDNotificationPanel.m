@@ -28,12 +28,14 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <QuartzCore/QuartzCore.h>
 
-static const CGFloat kPadding = 14.f;
+static const CGFloat kPadding = 10.f;
 static const CGFloat kTitleFontSize = 14.f;
+static const CGFloat kSubtitleFontSize = 12.f;
 
 @interface TDNotificationPanel ()
 
 @property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *subtitle;
 @property (nonatomic, strong) NSArray *backgroundColors;
 
 @end
@@ -42,11 +44,12 @@ static const CGFloat kTitleFontSize = 14.f;
 
 #pragma mark - Class Methods
 
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title hideAfterDelay:(NSTimeInterval)delay
++ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
     [panel setNotificationType:type];
     [panel setTitleText:title];
+    [panel setSubtitleText:subtitle];
     [view addSubview:panel];
     [panel show:YES];
     [panel hide:YES afterDelay:delay];
@@ -122,6 +125,9 @@ static const CGFloat kTitleFontSize = 14.f;
     _titleText = nil;
     _titleFont = [UIFont boldSystemFontOfSize:kTitleFontSize];
     
+    _subtitleText = nil;
+    _subtitleFont = [UIFont systemFontOfSize:kSubtitleFontSize];
+    
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self setOpaque:NO];
     [self setBackgroundColor:[UIColor clearColor]];
@@ -144,7 +150,7 @@ static const CGFloat kTitleFontSize = 14.f;
 
 - (void)setupLabels
 {
-    _title = [[UILabel alloc] initWithFrame:self.bounds];
+    _title = [[UILabel alloc] initWithFrame:CGRectZero];
     [_title setText:_titleText];
     [_title setAdjustsFontSizeToFitWidth:NO];
     [_title setTextAlignment:NSTextAlignmentCenter];
@@ -153,6 +159,18 @@ static const CGFloat kTitleFontSize = 14.f;
     [_title setTextColor:[UIColor whiteColor]];
     [_title setFont:_titleFont];
     [self addSubview:_title];
+    
+    _subtitle = [[UILabel alloc] initWithFrame:CGRectZero];
+    [_subtitle setText:_titleText];
+    [_subtitle setAdjustsFontSizeToFitWidth:NO];
+    [_subtitle setTextAlignment:NSTextAlignmentCenter];
+    [_subtitle setLineBreakMode:NSLineBreakByWordWrapping];
+    [_subtitle setNumberOfLines:0];
+    [_subtitle setOpaque:NO];
+    [_subtitle setBackgroundColor:[UIColor clearColor]];
+    [_subtitle setTextColor:[UIColor whiteColor]];
+    [_subtitle setFont:_subtitleFont];
+    [self addSubview:_subtitle];
 }
 
 #pragma mark - Show & Hide 
@@ -172,7 +190,7 @@ static const CGFloat kTitleFontSize = 14.f;
     if (animated)
     {
         CATransition *transition = [CATransition animation];
-        [transition setDuration:0.33];
+        [transition setDuration:0.3];
         [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
         [transition setType:kCATransitionPush];
         [transition setSubtype:kCATransitionFromBottom];
@@ -187,14 +205,14 @@ static const CGFloat kTitleFontSize = 14.f;
     if (animated)
     {
         CATransition *transition = [CATransition animation];
-        [transition setDuration:0.33];
+        [transition setDuration:0.3];
         [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
         [transition setType:kCATransitionPush];
         [transition setSubtype:kCATransitionFromTop];
         [[self layer] addAnimation:transition forKey:nil];
         [self setFrame:CGRectMake(0.f, -self.frame.size.height, self.frame.size.width, self.frame.size.height)];
         
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.33 * NSEC_PER_SEC));
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
             [self removeFromSuperview];
         });
@@ -214,7 +232,7 @@ static const CGFloat kTitleFontSize = 14.f;
 
 - (NSArray *)observableKeyPaths
 {
-    return @[@"notificationType", @"titleText", @"titleFont"];
+    return @[@"notificationType", @"titleText", @"titleFont", @"subtitleText", @"subtitleFont"];
 }
 
 - (void)registerForKVO
@@ -244,6 +262,14 @@ static const CGFloat kTitleFontSize = 14.f;
     else if ([keyPath isEqualToString:@"titleFont"])
     {
         [_title setFont:_titleFont];
+    }
+    else if ([keyPath isEqualToString:@"subtitleText"])
+    {
+        [_subtitle setText:_subtitleText];
+    }
+    else if ([keyPath isEqualToString:@"subtitleFont"])
+    {
+        [_subtitle setFont:_subtitleFont];
     }
 }
 
@@ -284,6 +310,8 @@ static const CGFloat kTitleFontSize = 14.f;
 
 - (void)layoutSubviews
 {
+    [super layoutSubviews];
+    
     CGPoint position = CGPointZero;
     
     if ([[self superview] isKindOfClass:NSClassFromString(@"UIWindow")])
@@ -312,25 +340,35 @@ static const CGFloat kTitleFontSize = 14.f;
         }
     }
 
-    // Determine the total width & height needed
+    // Determine the total width of the notification.
     CGSize totalSize = CGSizeZero;
     totalSize.width = self.bounds.size.width;
-    totalSize.height = kPadding;
-
+    
+    // Title
     CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
     titleSize.width = MIN(titleSize.width, totalSize.width);
-    totalSize.height += titleSize.height;
     
-    totalSize.height += 2 * kPadding;
-    
-    // Position title
-    CGFloat yPos = roundf(kPadding / 2);
-    CGRect title;
-    title.origin.y = yPos;
-    title.origin.x = roundf((self.bounds.size.width - titleSize.width) / 2);
+    CGRect title = CGRectZero;
     title.size = titleSize;
+    title.origin.y = kPadding;
+    title.origin.x = roundf((self.bounds.size.width - titleSize.width) / 2);
     _title.frame = title;
-
+    
+    totalSize.height += CGRectGetMaxY(_title.frame) + CGRectGetHeight(_title.frame);
+    
+    // Subtitle
+    CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
+    subtitleSize.width = MIN(subtitleSize.width, totalSize.width);
+    
+    CGRect subtitle = CGRectZero;
+    subtitle.size = subtitleSize;
+    subtitle.origin.y = CGRectGetMaxY(title) + 2; // Add 2 for spacing.
+    subtitle.origin.x = roundf((self.bounds.size.width - subtitleSize.width) / 2);
+    _subtitle.frame = subtitle;
+    [_subtitle sizeToFit];
+    
+    totalSize.height += CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
+    
     self.frame = CGRectMake(position.x, position.y, totalSize.width, totalSize.height);
 }
 

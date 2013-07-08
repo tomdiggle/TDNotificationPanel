@@ -43,14 +43,25 @@ typedef enum {
 
 /**
  * A short message to be displayed. If the text is too long it will get clipped by displaying "..." at the end. 
- * If set to nil then no title is displayed.
+ * If set to nil no title is displayed.
  */
 @property (nonatomic, copy) NSString *titleText;
 
 /**
- * Font to be used for the title. Default is system bold.
+ * Font to be used for the title. Default is system bold font.
  */
 @property (nonatomic, copy) UIFont *titleFont;
+
+/**
+ * A message to be displayed underneath the title.
+ * If set to nil no subtitle is displayed.
+ */
+@property (nonatomic, copy) NSString *subtitleText;
+
+/**
+ * Font to be use for the subtitle. Default is system font.
+ */
+@property (nonatomic, copy) UIFont *subtitleFont;
 
 /*
  * Creates a new notification panel, adds it to the provided view shows it and then removes it after the delay given.
@@ -64,7 +75,7 @@ typedef enum {
  *
  * @see TDNotificationType
  */
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title hideAfterDelay:(NSTimeInterval)delay;
++ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay;
 
 /**
  * Creates a new notification panel, adds it to the view provided and shows it.

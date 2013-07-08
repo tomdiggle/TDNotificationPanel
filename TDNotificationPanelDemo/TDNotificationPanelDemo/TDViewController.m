@@ -30,6 +30,7 @@
     [TDNotificationPanel showNotificationPanelInView:self.view
                                                 type:TDNotificationTypeError
                                                title:@"Error Notification"
+                                            subtitle:nil
                                       hideAfterDelay:3];
 }
 
@@ -38,6 +39,7 @@
     [TDNotificationPanel showNotificationPanelInView:self.view
                                                 type:TDNotificationTypeInfo
                                                title:@"Info Notification"
+                                            subtitle:nil
                                       hideAfterDelay:3];
 }
 
@@ -46,6 +48,7 @@
     [TDNotificationPanel showNotificationPanelInView:self.view
                                                 type:TDNotificationTypeSuccess
                                                title:@"Success Notification"
+                                            subtitle:nil
                                       hideAfterDelay:3];
 }
 
@@ -54,6 +57,7 @@
     TDNotificationPanel *panel = [TDNotificationPanel showNotificationPanelInView:self.view
                                                                          animated:YES];
     [panel setTitleText:@"Long Task"];
+    [panel setSubtitleText:@"with subtitles"];
     [panel setNotificationType:TDNotificationTypeSuccess];
     
     double delayInSeconds = 5.0;
@@ -69,6 +73,7 @@
     [TDNotificationPanel showNotificationPanelInView:self.view.window
                                                 type:TDNotificationTypeInfo
                                                title:@"Persistent Notification"
+                                            subtitle:nil
                                       hideAfterDelay:6];
 }
 
