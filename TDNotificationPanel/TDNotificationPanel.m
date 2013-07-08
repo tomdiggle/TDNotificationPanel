@@ -129,6 +129,8 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _subtitleText = nil;
     _subtitleFont = [UIFont systemFontOfSize:kSubtitleFontSize];
     
+    [self setDismissable:YES];
+    
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self setOpaque:NO];
     [self setBackgroundColor:[UIColor clearColor]];
@@ -308,6 +310,8 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if (!_dismissable) return;
+    
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
     [self hide:YES];

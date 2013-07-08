@@ -63,6 +63,11 @@ typedef enum {
  */
 @property (nonatomic, copy) UIFont *subtitleFont;
 
+/**
+ * When set to YES notification will be dismissable when tapped. When set to NO notification will only be able to be dismissed using hideNotificationPanelInView:animated method. Default is YES.
+ */
+@property (nonatomic, assign, getter = isDismissable) BOOL dismissable;
+
 /*
  * Creates a new notification panel, adds it to the provided view shows it and then removes it after the delay given.
  *
