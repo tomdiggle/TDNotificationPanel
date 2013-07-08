@@ -1,5 +1,5 @@
 # TDNotificationPanel
-TDNotificationPanel is a drop in class that displays a notification panel with a label.
+TDNotificationPanel is a drop in class that displays a notification panel with a label and subtitle.
 
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.png)
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info.png)
@@ -26,18 +26,18 @@ There are 3 different notification types these are:
 To display a notification panel use the following method:
 
 ```
-[TDNotificationPanel showNotificationPanelInView:self.view
-											type:TDNotificationTypeError
-										   title:@"Error Notification"
-										subtitle:@"Subtitle for notification"
-								  hideAfterDelay:3];
+[TDNotificationPanel showNotificationInView:self.view
+									   type:TDNotificationTypeError
+									  title:@"Error Notification"
+								   subtitle:@"Subtitle for notification"
+							 hideAfterDelay:3];
 ```
 
 If you need to run a long task use the following method:
 
 ```
-TDNotificationPanel *panel = [TDNotificationPanel showNotificationPanelInView:self.view
-                                                                     animated:YES];
+TDNotificationPanel *panel = [TDNotificationPanel showNotificationInView:self.view
+                                                                animated:YES];
 [panel setTitleText:@"Long Task"];
 [panel setSubtitle:@"Subtitle for notification"];
 [panel setNotificationType:TDNotificationTypeSuccess];
@@ -45,8 +45,8 @@ TDNotificationPanel *panel = [TDNotificationPanel showNotificationPanelInView:se
 [self longRunningTaskWithProgress:^(float)progress {
 
 } completion:^{
-	[TDNotificationPanel hideNotificationPanelInView:self.view
-                                            animated:YES];
+	[TDNotificationPanel hideNotificationInView:self.view
+                                       animated:YES];
 }];
 
 ```
