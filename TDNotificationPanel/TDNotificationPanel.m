@@ -45,7 +45,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 #pragma mark - Class Methods
 
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay
++ (TDNotificationPanel *)showNotificationInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
     [panel setNotificationType:type];
@@ -58,7 +58,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     return panel;
 }
 
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view animated:(BOOL)animated
++ (TDNotificationPanel *)showNotificationInView:(UIView *)view animated:(BOOL)animated
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
     [view addSubview:panel];
@@ -67,9 +67,9 @@ static const CGFloat kSubtitleFontSize = 12.f;
     return panel;
 }
 
-+ (BOOL)hideNotificationPanelInView:(UIView *)view animated:(BOOL)animated
++ (BOOL)hideNotificationInView:(UIView *)view animated:(BOOL)animated
 {
-    TDNotificationPanel *panel = [TDNotificationPanel notificationPanelForView:view];
+    TDNotificationPanel *panel = [TDNotificationPanel notificationInView:view];
     if (panel)
     {
         [panel hide:animated];
@@ -80,7 +80,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     return NO;
 }
 
-+ (TDNotificationPanel *)notificationPanelForView:(UIView *)view
++ (TDNotificationPanel *)notificationInView:(UIView *)view
 {
     NSEnumerator *subviews = [[view subviews] reverseObjectEnumerator];
     for (UIView *view in subviews)
@@ -94,7 +94,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     return nil;
 }
 
-+ (NSArray *)notificationPanelsForView:(UIView *)view
++ (NSArray *)notificationsInView:(UIView *)view
 {
     NSMutableArray *notificationPanels = [NSMutableArray array];
     NSArray *subview = [view subviews];

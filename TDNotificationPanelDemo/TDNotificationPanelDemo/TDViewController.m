@@ -27,35 +27,35 @@
 
 - (IBAction)displayErrorNotificationButtonTapped:(id)sender
 {
-    [TDNotificationPanel showNotificationPanelInView:self.view
-                                                type:TDNotificationTypeError
-                                               title:@"Error Notification"
-                                            subtitle:nil
-                                      hideAfterDelay:3];
+    [TDNotificationPanel showNotificationInView:self.view
+                                           type:TDNotificationTypeError
+                                          title:@"Error Notification"
+                                       subtitle:nil
+                                 hideAfterDelay:3];
 }
 
 - (IBAction)displayMessageNotificationButtonTapped:(id)sender
 {
-    [TDNotificationPanel showNotificationPanelInView:self.view
-                                                type:TDNotificationTypeMessage
-                                               title:@"Message Notification"
-                                            subtitle:nil
-                                      hideAfterDelay:3];
+    [TDNotificationPanel showNotificationInView:self.view
+                                           type:TDNotificationTypeMessage
+                                          title:@"Message Notification"
+                                       subtitle:nil
+                                 hideAfterDelay:3];
 }
 
 - (IBAction)displaySuccessNotificationButtonTapped:(id)sender
 {
-    [TDNotificationPanel showNotificationPanelInView:self.view
-                                                type:TDNotificationTypeSuccess
-                                               title:@"Success Notification"
-                                            subtitle:nil
-                                      hideAfterDelay:3];
+    [TDNotificationPanel showNotificationInView:self.view
+                                           type:TDNotificationTypeSuccess
+                                          title:@"Success Notification"
+                                       subtitle:nil
+                                 hideAfterDelay:3];
 }
 
 - (IBAction)displayLongTaskNotificationButtonTapped:(id)sender
 {
-    TDNotificationPanel *panel = [TDNotificationPanel showNotificationPanelInView:self.view
-                                                                         animated:YES];
+    TDNotificationPanel *panel = [TDNotificationPanel showNotificationInView:self.view
+                                                                    animated:YES];
     [panel setTitleText:@"Long Task"];
     [panel setSubtitleText:@"with subtitles"];
     [panel setNotificationType:TDNotificationTypeMessage];
@@ -64,18 +64,18 @@
     double delayInSeconds = 5.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [TDNotificationPanel hideNotificationPanelInView:self.view
+        [TDNotificationPanel hideNotificationInView:self.view
                                                 animated:YES];
     });
 }
 
 - (IBAction)persistentNotificationButtonTapped:(id)sender
 {
-    [TDNotificationPanel showNotificationPanelInView:self.view.window
-                                                type:TDNotificationTypeMessage
-                                               title:@"Persistent Notification"
-                                            subtitle:nil
-                                      hideAfterDelay:6];
+    [TDNotificationPanel showNotificationInView:self.view.window
+                                           type:TDNotificationTypeMessage
+                                          title:@"Persistent Notification"
+                                       subtitle:nil
+                                 hideAfterDelay:6];
 }
 
 @end

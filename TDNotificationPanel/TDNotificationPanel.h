@@ -35,15 +35,14 @@ typedef enum {
 @interface TDNotificationPanel : UIView
 
 /**
- * The notification type that will be used to determine the color of the background.
+ * The notification type that will be used to determine the color of the background & icon.
  *
  * @see TDNotificationType
  */
 @property (nonatomic, assign) TDNotificationType notificationType;
 
 /**
- * A short message to be displayed. If the text is too long it will get clipped by displaying "..." at the end. 
- * If set to nil no title is displayed.
+ * A short message to be displayed. If the text is too long it will get clipped by displaying "..." at the end. If set to nil no title is displayed.
  */
 @property (nonatomic, copy) NSString *titleText;
 
@@ -53,8 +52,7 @@ typedef enum {
 @property (nonatomic, copy) UIFont *titleFont;
 
 /**
- * A message to be displayed underneath the title.
- * If set to nil no subtitle is displayed.
+ * A message to be displayed underneath the title. If set to nil no subtitle is displayed.
  */
 @property (nonatomic, copy) NSString *subtitleText;
 
@@ -64,53 +62,53 @@ typedef enum {
 @property (nonatomic, copy) UIFont *subtitleFont;
 
 /**
- * When set to YES notification will be dismissable when tapped. When set to NO notification will only be able to be dismissed using hideNotificationPanelInView:animated method. Default is YES.
+ * When set to YES notification will be dismissable when tapped. When set to NO notification will only be able to be dismissed using hideNotificationInView:animated method. Default is YES.
  */
 @property (nonatomic, assign, getter = isDismissable) BOOL dismissable;
 
-/*
- * Creates a new notification panel, adds it to the provided view shows it and then removes it after the delay given.
+/**
+ * Creates a new notification, adds it to the provided view shows it and then removes it after the delay given.
  *
- * @param view The view that the notification panel will be added to.
+ * @param view The view that the notification will be added to.
  * @param type The notification type.
  * @param title The title that will be displayed.
- * @param delay The delay before the notification panel will be removed.
+ * @param delay The delay before the notification will be removed.
  *
- * @return A reference to the created notification panel.
+ * @return A reference to the created notification.
  *
  * @see TDNotificationType
  */
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay;
++ (TDNotificationPanel *)showNotificationInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay;
 
 /**
- * Creates a new notification panel, adds it to the view provided and shows it.
+ * Creates a new notification, adds it to the view provided and shows it.
  *
- * @param view The view that the notification panel will be added to.
- * @param animated If set to YES the notification panel will be shown and hidden using an animation. If set to NO, no animation will be used.
+ * @param view The view that the notification will be added to.
+ * @param animated If set to YES the notification will be shown and hidden using an animation. If set to NO, no animation will be used.
  *
- * @return A reference to the created notification panel.
+ * @return A reference to the created notification.
  */
-+ (TDNotificationPanel *)showNotificationPanelInView:(UIView *)view animated:(BOOL)animated;
++ (TDNotificationPanel *)showNotificationInView:(UIView *)view animated:(BOOL)animated;
 
 /**
- * Hides the top-most notification panel.
+ * Hides the top-most notification in the view provided.
  *
- * @param view The view that the notification panel will be removed from.
- * @param animated If set to YES the notification panel will be shown and hidden using an animation. If set to NO, no animation will be used.
+ * @param view The view that the notification will be removed from.
+ * @param animated If set to YES the notification will be shown and hidden using an animation. If set to NO, no animation will be used.
  * 
- * @return YES if notification panel is hidden, NO otherwise.
+ * @return YES if notification is hidden, NO otherwise.
  *
- * @see showNotificationPanelInView:animated:
+ * @see showNotificationInView:animated:
  */
-+ (BOOL)hideNotificationPanelInView:(UIView *)view animated:(BOOL)animated;
++ (BOOL)hideNotificationInView:(UIView *)view animated:(BOOL)animated;
 
 /**
- * Returns an array of notification panels for the view provided.
+ * Returns an array of notifications in the view provided.
  *
- * @param view The view in which to check for notification panels.
+ * @param view The view in which to check for notifications.
  *
- * @return An array of notification panels for the view provided, or nil if none exists.
+ * @return An array of notifications for the view provided, or nil if none exists.
  */
-+ (NSArray *)notificationPanelsForView:(UIView *)view;
++ (NSArray *)notificationsInView:(UIView *)view;
 
 @end
