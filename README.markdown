@@ -6,7 +6,7 @@ TDNotificationPanel is a drop in class that displays a notification panel with a
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.png)
 
 ## Requirements
-TDNotification has been tested on iOS 6+ and is compatible with ARC projects. It depends on the following Apple frameworks:
+TDNotificationPanel has been tested on iOS 6+ and is compatible with ARC projects. It depends on the following Apple frameworks:
 
 - Foundation.framework
 - UIKit.framework
@@ -20,7 +20,7 @@ Add the following source files `TDNotificationPanel.h` and `TDNotificationPanel.
 There are 3 different notification types these are:
 
 - TDNotificationTypeError
-- TDNotificationTypeInfo
+- TDNotificationTypeMessage
 - TDNotificationTypeSuccess
 
 To display a notification panel use the following method:

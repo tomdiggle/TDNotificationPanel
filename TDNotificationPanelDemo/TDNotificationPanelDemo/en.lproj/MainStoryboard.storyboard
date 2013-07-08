@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3012" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1Je-sW-veF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1Je-sW-veF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -27,7 +27,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gef-Zb-nIC">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Display Info Notification">
+                                <state key="normal" title="Display Message Notification">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -35,7 +35,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="displayInfoNotificationButtonTapped:" destination="2" eventType="touchUpInside" id="IwR-c6-ili"/>
+                                    <action selector="displayMessageNotificationButtonTapped:" destination="2" eventType="touchUpInside" id="LJ0-rd-E9c"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vno-ve-4eI">
@@ -157,8 +157,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TDViewController.h"/>
             <relationships>
                 <relationship kind="action" name="displayErrorNotificationButtonTapped:"/>
-                <relationship kind="action" name="displayInfoNotificationButtonTapped:"/>
                 <relationship kind="action" name="displayLongTaskNotificationButtonTapped:"/>
+                <relationship kind="action" name="displayMessageNotificationButtonTapped:"/>
                 <relationship kind="action" name="displaySuccessNotificationButtonTapped:"/>
                 <relationship kind="action" name="persistentNotificationButtonTapped:"/>
             </relationships>

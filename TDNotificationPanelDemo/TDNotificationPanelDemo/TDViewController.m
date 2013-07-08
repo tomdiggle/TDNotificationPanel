@@ -34,11 +34,11 @@
                                       hideAfterDelay:3];
 }
 
-- (IBAction)displayInfoNotificationButtonTapped:(id)sender
+- (IBAction)displayMessageNotificationButtonTapped:(id)sender
 {
     [TDNotificationPanel showNotificationPanelInView:self.view
-                                                type:TDNotificationTypeInfo
-                                               title:@"Info Notification"
+                                                type:TDNotificationTypeMessage
+                                               title:@"Message Notification"
                                             subtitle:nil
                                       hideAfterDelay:3];
 }
@@ -58,7 +58,7 @@
                                                                          animated:YES];
     [panel setTitleText:@"Long Task"];
     [panel setSubtitleText:@"with subtitles"];
-    [panel setNotificationType:TDNotificationTypeInfo];
+    [panel setNotificationType:TDNotificationTypeMessage];
     
     double delayInSeconds = 5.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -71,7 +71,7 @@
 - (IBAction)persistentNotificationButtonTapped:(id)sender
 {
     [TDNotificationPanel showNotificationPanelInView:self.view.window
-                                                type:TDNotificationTypeInfo
+                                                type:TDNotificationTypeMessage
                                                title:@"Persistent Notification"
                                             subtitle:nil
                                       hideAfterDelay:6];

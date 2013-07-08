@@ -28,7 +28,7 @@
 
 typedef enum {
     TDNotificationTypeError,
-    TDNotificationTypeInfo,
+    TDNotificationTypeMessage,
     TDNotificationTypeSuccess,
 } TDNotificationType;
 

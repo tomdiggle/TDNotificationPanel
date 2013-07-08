@@ -289,7 +289,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
         endColor = [UIColor colorWithRed:0.804 green:0 blue:0 alpha:0.750];
         [_icon setImage:[UIImage imageNamed:@"errorIcon"]];
     }
-    else if (_notificationType == TDNotificationTypeInfo)
+    else if (_notificationType == TDNotificationTypeMessage)
     {
         startColor = [UIColor colorWithRed:0.290 green:0.607 blue:0.917 alpha:0.750];
         endColor = [UIColor colorWithRed:0.121 green:0.482 blue:0.898 alpha:0.750];
