@@ -29,6 +29,7 @@ To display a notification panel use the following method:
 [TDNotificationPanel showNotificationPanelInView:self.view
 											type:TDNotificationTypeError
 										   title:@"Error Notification"
+										subtitle:@"Subtitle for notification"
 								  hideAfterDelay:3];
 ```
 
@@ -38,6 +39,7 @@ If you need to run a long task use the following method:
 TDNotificationPanel *panel = [TDNotificationPanel showNotificationPanelInView:self.view
                                                                      animated:YES];
 [panel setTitleText:@"Long Task"];
+[panel setSubtitle:@"Subtitle for notification"];
 [panel setNotificationType:TDNotificationTypeSuccess];
 
 [self longRunningTaskWithProgress:^(float)progress {
