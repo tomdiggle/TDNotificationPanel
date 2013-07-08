@@ -153,7 +153,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _title = [[UILabel alloc] initWithFrame:CGRectZero];
     [_title setText:_titleText];
     [_title setAdjustsFontSizeToFitWidth:NO];
-    [_title setTextAlignment:NSTextAlignmentCenter];
+    [_title setTextAlignment:NSTextAlignmentLeft];
     [_title setOpaque:NO];
     [_title setBackgroundColor:[UIColor clearColor]];
     [_title setTextColor:[UIColor whiteColor]];
@@ -163,7 +163,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _subtitle = [[UILabel alloc] initWithFrame:CGRectZero];
     [_subtitle setText:_titleText];
     [_subtitle setAdjustsFontSizeToFitWidth:NO];
-    [_subtitle setTextAlignment:NSTextAlignmentCenter];
+    [_subtitle setTextAlignment:NSTextAlignmentLeft];
     [_subtitle setLineBreakMode:NSLineBreakByWordWrapping];
     [_subtitle setNumberOfLines:0];
     [_subtitle setOpaque:NO];
@@ -345,25 +345,27 @@ static const CGFloat kSubtitleFontSize = 12.f;
     totalSize.width = self.bounds.size.width;
     
     // Title
-    CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
-    titleSize.width = MIN(titleSize.width, totalSize.width);
-    
     CGRect title = CGRectZero;
-    title.size = titleSize;
     title.origin.y = kPadding;
-    title.origin.x = roundf((self.bounds.size.width - titleSize.width) / 2);
+    title.origin.x = kPadding * 2;
+    
+    CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
+    titleSize.width = MIN(titleSize.width, totalSize.width - title.origin.x - kPadding * 2);
+
+    title.size = titleSize;
     _title.frame = title;
     
     totalSize.height += CGRectGetMaxY(_title.frame) + CGRectGetHeight(_title.frame);
     
     // Subtitle
-    CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
-    subtitleSize.width = MIN(subtitleSize.width, totalSize.width);
-    
     CGRect subtitle = CGRectZero;
-    subtitle.size = subtitleSize;
     subtitle.origin.y = CGRectGetMaxY(title) + 2; // Add 2 for spacing.
-    subtitle.origin.x = roundf((self.bounds.size.width - subtitleSize.width) / 2);
+    subtitle.origin.x = kPadding * 2;
+    
+    CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
+    subtitleSize.width = MIN(subtitleSize.width, totalSize.width - subtitle.origin.x - kPadding * 2);
+    
+    subtitle.size = subtitleSize;
     _subtitle.frame = subtitle;
     [_subtitle sizeToFit];
     
