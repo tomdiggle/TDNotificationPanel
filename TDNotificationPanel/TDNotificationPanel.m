@@ -37,6 +37,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UILabel *subtitle;
 @property (nonatomic, strong) NSArray *backgroundColors;
+@property (nonatomic, strong) UIImageView *icon;
 
 @end
 
@@ -171,6 +172,9 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [_subtitle setTextColor:[UIColor whiteColor]];
     [_subtitle setFont:_subtitleFont];
     [self addSubview:_subtitle];
+    
+    _icon = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [self addSubview:_icon];
 }
 
 #pragma mark - Show & Hide 
@@ -253,7 +257,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 {
     if ([keyPath isEqualToString:@"notificationType"])
     {
-        [self updateBackground];
+        [self updateIconAndBackground];
     }
     else if ([keyPath isEqualToString:@"titleText"])
     {
@@ -273,9 +277,9 @@ static const CGFloat kSubtitleFontSize = 12.f;
     }
 }
 
-#pragma mark - Update Background
+#pragma mark - Update Icon and Background
 
-- (void)updateBackground
+- (void)updateIconAndBackground
 {
     UIColor *startColor = nil;
     UIColor *endColor = nil;
@@ -283,16 +287,19 @@ static const CGFloat kSubtitleFontSize = 12.f;
     {
         startColor = [UIColor colorWithRed:1 green:0.102 blue:0 alpha:0.750];
         endColor = [UIColor colorWithRed:0.804 green:0 blue:0 alpha:0.750];
+        [_icon setImage:[UIImage imageNamed:@"errorIcon"]];
     }
     else if (_notificationType == TDNotificationTypeInfo)
     {
         startColor = [UIColor colorWithRed:0.290 green:0.607 blue:0.917 alpha:0.750];
         endColor = [UIColor colorWithRed:0.121 green:0.482 blue:0.898 alpha:0.750];
+        [_icon setImage:nil];
     }
     else if (_notificationType == TDNotificationTypeSuccess)
     {
         startColor = [UIColor colorWithRed:0.356 green:0.650 blue:0 alpha:0.750];
         endColor = [UIColor colorWithRed:0.192 green:0.635 blue:0 alpha:0.750];
+        [_icon setImage:[UIImage imageNamed:@"successIcon"]];
     }
     _backgroundColors = @[(id)startColor.CGColor, (id)endColor.CGColor];
 }
@@ -344,10 +351,13 @@ static const CGFloat kSubtitleFontSize = 12.f;
     CGSize totalSize = CGSizeZero;
     totalSize.width = self.bounds.size.width;
     
+    // Icon
+    _icon.frame = CGRectMake(kPadding * 2, kPadding, 30, 30);
+    
     // Title
     CGRect title = CGRectZero;
+    title.origin.x = [_icon image] ? _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kPadding : kPadding * 2;
     title.origin.y = kPadding;
-    title.origin.x = kPadding * 2;
     
     CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
     titleSize.width = MIN(titleSize.width, totalSize.width - title.origin.x - kPadding * 2);
@@ -355,12 +365,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
     title.size = titleSize;
     _title.frame = title;
     
-    totalSize.height += CGRectGetMaxY(_title.frame) + CGRectGetHeight(_title.frame);
-    
     // Subtitle
     CGRect subtitle = CGRectZero;
+    subtitle.origin.x = [_icon image] ? _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kPadding : kPadding * 2;
     subtitle.origin.y = CGRectGetMaxY(title) + 2; // Add 2 for spacing.
-    subtitle.origin.x = kPadding * 2;
     
     CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
     subtitleSize.width = MIN(subtitleSize.width, totalSize.width - subtitle.origin.x - kPadding * 2);
@@ -369,7 +377,18 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _subtitle.frame = subtitle;
     [_subtitle sizeToFit];
     
-    totalSize.height += CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
+    // Determine the total height of the notification.
+    if (_subtitleText || ![_icon image])
+    {
+        totalSize.height = CGRectGetMaxY(_title.frame) + CGRectGetHeight(_title.frame) + CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
+    }
+    else
+    {
+        // When no subtitle is being shown increase the y offset of the title frame so it's more center.
+        _title.frame = CGRectOffset(_title.frame, 0, CGRectGetMinY(_title.frame) / 2);
+        
+        totalSize.height = CGRectGetMaxY(_icon.frame) + CGRectGetHeight(_icon.frame) + CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
+    }
     
     self.frame = CGRectMake(position.x, position.y, totalSize.width, totalSize.height);
 }

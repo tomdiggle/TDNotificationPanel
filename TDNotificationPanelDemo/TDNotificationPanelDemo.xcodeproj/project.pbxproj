@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3297C7FC178AE284001C8605 /* errorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FA178AE284001C8605 /* errorIcon.png */; };
+		3297C7FD178AE284001C8605 /* errorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FB178AE284001C8605 /* errorIcon@2x.png */; };
+		3297C800178B1465001C8605 /* successIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FE178B1465001C8605 /* successIcon.png */; };
+		3297C801178B1465001C8605 /* successIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FF178B1465001C8605 /* successIcon@2x.png */; };
 		32EA277F16D1346400BB528E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EA277E16D1346400BB528E /* UIKit.framework */; };
 		32EA278116D1346400BB528E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EA278016D1346400BB528E /* Foundation.framework */; };
 		32EA278916D1346400BB528E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32EA278716D1346400BB528E /* InfoPlist.strings */; };
@@ -23,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3297C7FA178AE284001C8605 /* errorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorIcon.png; sourceTree = "<group>"; };
+		3297C7FB178AE284001C8605 /* errorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errorIcon@2x.png"; sourceTree = "<group>"; };
+		3297C7FE178B1465001C8605 /* successIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = successIcon.png; sourceTree = "<group>"; };
+		3297C7FF178B1465001C8605 /* successIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "successIcon@2x.png"; sourceTree = "<group>"; };
 		32EA277B16D1346400BB528E /* TDNotificationPanelDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDNotificationPanelDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32EA277E16D1346400BB528E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		32EA278016D1346400BB528E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,6 +67,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3297C802178B1468001C8605 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				3297C7FA178AE284001C8605 /* errorIcon.png */,
+				3297C7FB178AE284001C8605 /* errorIcon@2x.png */,
+				3297C7FE178B1465001C8605 /* successIcon.png */,
+				3297C7FF178B1465001C8605 /* successIcon@2x.png */,
+			);
+			name = Graphics;
+			sourceTree = "<group>";
+		};
 		32EA277216D1346400BB528E = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +139,7 @@
 			children = (
 				32EA27A416D1359900BB528E /* TDNotificationPanel.h */,
 				32EA27A516D1359900BB528E /* TDNotificationPanel.m */,
+				3297C802178B1468001C8605 /* Graphics */,
 			);
 			name = TDNotificationPanel;
 			path = ../TDNotificationPanel;
@@ -182,6 +202,10 @@
 				32EA279316D1346400BB528E /* Default@2x.png in Resources */,
 				32EA279516D1346400BB528E /* Default-568h@2x.png in Resources */,
 				32EA279816D1346400BB528E /* MainStoryboard.storyboard in Resources */,
+				3297C7FC178AE284001C8605 /* errorIcon.png in Resources */,
+				3297C7FD178AE284001C8605 /* errorIcon@2x.png in Resources */,
+				3297C800178B1465001C8605 /* successIcon.png in Resources */,
+				3297C801178B1465001C8605 /* successIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

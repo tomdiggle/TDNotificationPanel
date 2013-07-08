@@ -58,7 +58,7 @@
                                                                          animated:YES];
     [panel setTitleText:@"Long Task"];
     [panel setSubtitleText:@"with subtitles"];
-    [panel setNotificationType:TDNotificationTypeSuccess];
+    [panel setNotificationType:TDNotificationTypeInfo];
     
     double delayInSeconds = 5.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
