@@ -175,7 +175,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [_subtitle setFont:_subtitleFont];
     [self addSubview:_subtitle];
     
-    _icon = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _icon = [[UIImageView alloc] initWithFrame:CGRectMake(kPadding * 2, kPadding, 30, 30)];
     [self addSubview:_icon];
 }
 
@@ -354,9 +354,6 @@ static const CGFloat kSubtitleFontSize = 12.f;
     // Determine the total width of the notification.
     CGSize totalSize = CGSizeZero;
     totalSize.width = self.bounds.size.width;
-    
-    // Icon
-    _icon.frame = CGRectMake(kPadding * 2, kPadding, 30, 30);
     
     // Title
     CGRect title = CGRectZero;
