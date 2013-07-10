@@ -78,7 +78,7 @@ typedef enum {
  *
  * @see TDNotificationType
  */
-+ (TDNotificationPanel *)showNotificationInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay;
++ (instancetype)showNotificationInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay;
 
 /**
  * Creates a new notification, adds it to the view provided and shows it.
@@ -88,7 +88,7 @@ typedef enum {
  *
  * @return A reference to the created notification.
  */
-+ (TDNotificationPanel *)showNotificationInView:(UIView *)view animated:(BOOL)animated;
++ (instancetype)showNotificationInView:(UIView *)view animated:(BOOL)animated;
 
 /**
  * Hides the top-most notification in the view provided.

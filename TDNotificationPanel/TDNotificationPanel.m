@@ -45,7 +45,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 #pragma mark - Class Methods
 
-+ (TDNotificationPanel *)showNotificationInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay
++ (instancetype)showNotificationInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
     [panel setNotificationType:type];
@@ -58,7 +58,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     return panel;
 }
 
-+ (TDNotificationPanel *)showNotificationInView:(UIView *)view animated:(BOOL)animated
++ (instancetype)showNotificationInView:(UIView *)view animated:(BOOL)animated
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
     [view addSubview:panel];
