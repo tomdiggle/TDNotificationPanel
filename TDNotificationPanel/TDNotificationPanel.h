@@ -27,6 +27,11 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
+    TDNotificationModeText,
+    TDNotificationModeProgressBar
+} TDNotificationMode;
+
+typedef enum {
     TDNotificationTypeError,
     TDNotificationTypeMessage,
     TDNotificationTypeSuccess,
@@ -40,6 +45,13 @@ typedef enum {
  * @see TDNotificationType
  */
 @property (nonatomic, assign) TDNotificationType notificationType;
+
+/**
+ * The notification operation mode. The default is TDNotificationModeText.
+ *
+ * @see TDNotificationMode
+ */
+@property (nonatomic, assign) TDNotificationMode notificationMode;
 
 /**
  * A short message to be displayed. If the text is too long it will get clipped by displaying "..." at the end. If set to nil no title is displayed.
@@ -60,6 +72,11 @@ typedef enum {
  * Font to be use for the subtitle. Default is system font.
  */
 @property (nonatomic, copy) UIFont *subtitleFont;
+
+/**
+ * The progress indicator.
+ */
+@property (nonatomic, strong) UIProgressView *progressIndicator;
 
 /**
  * When set to YES notification will be dismissable when tapped. When set to NO notification will only be able to be dismissed using hideNotificationInView:animated method. Default is YES.

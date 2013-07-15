@@ -81,20 +81,20 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="68t-jp-dEB" firstAttribute="top" secondItem="vno-ve-4eI" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="0zc-UB-mAG"/>
-                            <constraint firstItem="mW3-0P-cCV" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="3hE-R7-viH"/>
-                            <constraint firstItem="mW3-0P-cCV" firstAttribute="trailing" secondItem="68t-jp-dEB" secondAttribute="trailing" type="default" id="FWl-YB-w7N"/>
-                            <constraint firstItem="mW3-0P-cCV" firstAttribute="top" secondItem="68t-jp-dEB" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Gei-Zu-Vkb"/>
-                            <constraint firstItem="vno-ve-4eI" firstAttribute="trailing" secondItem="gef-Zb-nIC" secondAttribute="trailing" type="default" id="Hgy-jo-BtK"/>
-                            <constraint firstItem="vno-ve-4eI" firstAttribute="leading" secondItem="68t-jp-dEB" secondAttribute="leading" type="default" id="KnQ-P5-pEd"/>
-                            <constraint firstItem="iAp-nX-oB2" firstAttribute="top" secondItem="3" secondAttribute="top" constant="68" id="L14-Yb-gw5"/>
-                            <constraint firstItem="mW3-0P-cCV" firstAttribute="leading" secondItem="68t-jp-dEB" secondAttribute="leading" type="default" id="LOP-4o-FZp"/>
-                            <constraint firstItem="vno-ve-4eI" firstAttribute="leading" secondItem="gef-Zb-nIC" secondAttribute="leading" type="default" id="OeQ-zZ-PK8"/>
-                            <constraint firstItem="vno-ve-4eI" firstAttribute="top" secondItem="gef-Zb-nIC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="PUs-RU-djq"/>
-                            <constraint firstItem="gef-Zb-nIC" firstAttribute="top" secondItem="iAp-nX-oB2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Sj9-aE-mmD"/>
-                            <constraint firstItem="vno-ve-4eI" firstAttribute="trailing" secondItem="68t-jp-dEB" secondAttribute="trailing" type="default" id="gTf-mT-Txa"/>
-                            <constraint firstItem="gef-Zb-nIC" firstAttribute="leading" secondItem="iAp-nX-oB2" secondAttribute="leading" type="default" id="ra8-tJ-Mbv"/>
-                            <constraint firstItem="gef-Zb-nIC" firstAttribute="trailing" secondItem="iAp-nX-oB2" secondAttribute="trailing" type="default" id="uwF-2d-Z14"/>
+                            <constraint firstItem="vno-ve-4eI" firstAttribute="top" secondItem="gef-Zb-nIC" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="0BZ-O2-MYa"/>
+                            <constraint firstItem="68t-jp-dEB" firstAttribute="leading" secondItem="mW3-0P-cCV" secondAttribute="leading" type="default" id="22l-N9-i87"/>
+                            <constraint firstItem="gef-Zb-nIC" firstAttribute="leading" secondItem="vno-ve-4eI" secondAttribute="leading" type="default" id="JkZ-zF-mCe"/>
+                            <constraint firstItem="mW3-0P-cCV" firstAttribute="top" secondItem="68t-jp-dEB" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Jkb-Xa-VKY"/>
+                            <constraint firstItem="68t-jp-dEB" firstAttribute="top" secondItem="vno-ve-4eI" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Jnw-9z-fdk"/>
+                            <constraint firstItem="gef-Zb-nIC" firstAttribute="top" secondItem="iAp-nX-oB2" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Mf1-rP-6bf"/>
+                            <constraint firstItem="68t-jp-dEB" firstAttribute="trailing" secondItem="mW3-0P-cCV" secondAttribute="trailing" type="default" id="OgM-Za-Kve"/>
+                            <constraint firstItem="iAp-nX-oB2" firstAttribute="leading" secondItem="gef-Zb-nIC" secondAttribute="leading" type="default" id="Z8m-wA-1KA"/>
+                            <constraint firstItem="vno-ve-4eI" firstAttribute="leading" secondItem="68t-jp-dEB" secondAttribute="leading" type="default" id="ZCd-dU-x9a"/>
+                            <constraint firstItem="iAp-nX-oB2" firstAttribute="top" secondItem="3" secondAttribute="top" constant="68" id="c2Y-rQ-irM"/>
+                            <constraint firstItem="68t-jp-dEB" firstAttribute="trailing" secondItem="vno-ve-4eI" secondAttribute="trailing" type="default" id="mC7-TN-7NN"/>
+                            <constraint firstItem="gef-Zb-nIC" firstAttribute="trailing" secondItem="vno-ve-4eI" secondAttribute="trailing" type="default" id="u7X-ci-srB"/>
+                            <constraint firstItem="68t-jp-dEB" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="wnV-Rs-0Qd"/>
+                            <constraint firstItem="gef-Zb-nIC" firstAttribute="trailing" secondItem="iAp-nX-oB2" secondAttribute="trailing" type="default" id="yLO-Tn-0v8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TDNotificationPanel Demo" id="cal-ul-iIx"/>
@@ -113,7 +113,7 @@
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Tap back button to see notification persist across views." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="haM-l4-WSy">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="xKZ-mi-EGw"/>
+                                    <constraint firstAttribute="height" constant="47" id="4jX-XT-Nmy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -122,9 +122,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="haM-l4-WSy" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="GIJ-Ng-8Gc"/>
-                            <constraint firstItem="haM-l4-WSy" firstAttribute="top" secondItem="AYO-E7-v1w" secondAttribute="top" constant="45" id="NLD-bm-Wsc"/>
-                            <constraint firstItem="haM-l4-WSy" firstAttribute="leading" secondItem="AYO-E7-v1w" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fGQ-qU-2Gm"/>
+                            <constraint firstItem="haM-l4-WSy" firstAttribute="top" secondItem="AYO-E7-v1w" secondAttribute="top" constant="45" id="Px8-Wc-MWI"/>
+                            <constraint firstItem="haM-l4-WSy" firstAttribute="leading" secondItem="AYO-E7-v1w" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="cP7-wo-oyU"/>
+                            <constraint firstAttribute="trailing" secondItem="haM-l4-WSy" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="sDY-Du-yEE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Lec-dr-S91"/>

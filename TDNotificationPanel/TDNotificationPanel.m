@@ -28,7 +28,9 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <QuartzCore/QuartzCore.h>
 
-static const CGFloat kPadding = 10.f;
+static const CGFloat kXPadding = 20.f;
+static const CGFloat kYPadding = 10.f;
+static const CGFloat kSpacing = 4.f;
 static const CGFloat kTitleFontSize = 14.f;
 static const CGFloat kSubtitleFontSize = 12.f;
 
@@ -118,10 +120,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if (!(self = [super initWithFrame:frame]))
-    {
-        return nil;
-    }
+    if (!(self = [super initWithFrame:frame])) return nil;
     
     _titleText = nil;
     _titleFont = [UIFont boldSystemFontOfSize:kTitleFontSize];
@@ -129,12 +128,13 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _subtitleText = nil;
     _subtitleFont = [UIFont systemFontOfSize:kSubtitleFontSize];
     
-    [self setDismissable:YES];
+    _notificationMode = TDNotificationModeText;
+    _dismissable = YES;
     
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self setOpaque:NO];
     [self setBackgroundColor:[UIColor clearColor]];
-    [self setAlpha:0.f];
+    [self setAlpha:0];
     
     [self setupLabels];
     [self registerForKVO];
@@ -175,7 +175,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [_subtitle setFont:_subtitleFont];
     [self addSubview:_subtitle];
     
-    _icon = [[UIImageView alloc] initWithFrame:CGRectMake(kPadding * 2, kPadding, 30, 30)];
+    _icon = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self addSubview:_icon];
 }
 
@@ -238,7 +238,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (NSArray *)observableKeyPaths
 {
-    return @[@"notificationType", @"titleText", @"titleFont", @"subtitleText", @"subtitleFont"];
+    return @[@"notificationType", @"notificationMode", @"titleText", @"titleFont", @"subtitleText", @"subtitleFont"];
 }
 
 - (void)registerForKVO
@@ -261,9 +261,14 @@ static const CGFloat kSubtitleFontSize = 12.f;
     {
         [self updateIconAndBackground];
     }
+    else if ([keyPath isEqualToString:@"notificationMode"])
+    {
+        [self updateIndicators];
+    }
     else if ([keyPath isEqualToString:@"titleText"])
     {
         [_title setText:_titleText];
+        [self setNeedsLayout];
     }
     else if ([keyPath isEqualToString:@"titleFont"])
     {
@@ -272,6 +277,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     else if ([keyPath isEqualToString:@"subtitleText"])
     {
         [_subtitle setText:_subtitleText];
+        [self setNeedsLayout];
     }
     else if ([keyPath isEqualToString:@"subtitleFont"])
     {
@@ -304,6 +310,25 @@ static const CGFloat kSubtitleFontSize = 12.f;
         [_icon setImage:[UIImage imageNamed:@"successIcon"]];
     }
     _backgroundColors = @[(id)startColor.CGColor, (id)endColor.CGColor];
+}
+
+- (void)updateIndicators
+{
+    if (_notificationMode == TDNotificationModeText)
+    {
+        [_progressIndicator removeFromSuperview];
+        _progressIndicator = nil;
+    }
+    else if (_notificationMode == TDNotificationModeProgressBar)
+    {
+        // No icon will be shown when a progress indicator is being displayed.
+        [_icon removeFromSuperview];
+        _icon = nil;
+        
+        _progressIndicator = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        [_progressIndicator setFrame:CGRectZero];
+        [self addSubview:_progressIndicator];
+    }
 }
 
 #pragma mark - Handling Touch
@@ -355,31 +380,81 @@ static const CGFloat kSubtitleFontSize = 12.f;
     CGSize totalSize = CGSizeZero;
     totalSize.width = self.bounds.size.width;
     
-    // Title
-    CGRect title = CGRectZero;
-    title.origin.x = [_icon image] ? _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kPadding : kPadding * 2;
-    title.origin.y = kPadding;
+    // Icon
+    if ([_icon image])
+    {
+        [_icon setFrame:CGRectMake(kXPadding, kYPadding, 30, 30)];
+    }
     
-    CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
-    titleSize.width = MIN(titleSize.width, totalSize.width - title.origin.x - kPadding * 2);
-
-    title.size = titleSize;
-    _title.frame = title;
+    // Title
+    if (_titleText)
+    {
+        CGRect title = CGRectZero;
+        title.origin.x = _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kXPadding;
+        title.origin.y = kYPadding;
+        
+        CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
+        titleSize.width = MIN(titleSize.width, totalSize.width - title.origin.x - kXPadding);
+        title.size = titleSize;
+        _title.frame = title;
+    }
+    
+    // Progress indicator
+    if (_notificationMode == TDNotificationModeProgressBar)
+    {
+        CGRect progress = CGRectZero;
+        progress.origin.x = kXPadding;
+        if (_titleText)
+        {
+            progress.origin.y = CGRectGetMaxY(_title.frame) + kSpacing;
+        }
+        else
+        {
+            progress.origin.y = kYPadding;
+        }
+        
+        progress.size.width = self.bounds.size.width - kXPadding * 2;
+        [_progressIndicator setFrame:progress];
+    }
     
     // Subtitle
     CGRect subtitle = CGRectZero;
-    subtitle.origin.x = [_icon image] ? _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kPadding : kPadding * 2;
-    subtitle.origin.y = CGRectGetMaxY(title) + 2; // Add 2 for spacing.
+    subtitle.origin.x = _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kXPadding;
+    if (_notificationMode == TDNotificationModeProgressBar)
+    {
+        subtitle.origin.y = CGRectGetMaxY([_progressIndicator frame]) + kSpacing;
+    }
+    else
+    {
+        subtitle.origin.y = CGRectGetMaxY(_title.frame) + kSpacing;
+    }
     
     CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
-    subtitleSize.width = MIN(subtitleSize.width, totalSize.width - subtitle.origin.x - kPadding * 2);
-    
+    subtitleSize.width = MIN(subtitleSize.width, totalSize.width - subtitle.origin.x - kXPadding);
     subtitle.size = subtitleSize;
     _subtitle.frame = subtitle;
     [_subtitle sizeToFit];
     
     // Determine the total height of the notification.
-    if (_subtitleText || ![_icon image])
+    if (_notificationMode == TDNotificationModeProgressBar)
+    {
+        totalSize.height += CGRectGetMaxY(_progressIndicator.frame) + CGRectGetHeight(_progressIndicator.frame);
+        
+        if (_titleText)
+        {
+            totalSize.height += CGRectGetHeight(_title.frame);
+        }
+        
+        if (_subtitleText)
+        {
+            totalSize.height += CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
+        }
+        else
+        {
+            totalSize.height += CGRectGetMaxY(_title.frame) + kYPadding;
+        }
+    }
+    else if (_subtitleText || ![_icon image])
     {
         totalSize.height = CGRectGetMaxY(_title.frame) + CGRectGetHeight(_title.frame) + CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
     }
@@ -388,7 +463,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
         // When no subtitle is being shown increase the y offset of the title frame so it's more center.
         _title.frame = CGRectOffset(_title.frame, 0, CGRectGetMinY(_title.frame) / 2);
         
-        totalSize.height = CGRectGetMaxY(_icon.frame) + CGRectGetHeight(_icon.frame) + CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
+        totalSize.height = CGRectGetMaxY(_icon.frame) + CGRectGetHeight(_icon.frame) + CGRectGetMaxY(_title.frame);
     }
     
     self.frame = CGRectMake(position.x, position.y, totalSize.width, totalSize.height);
@@ -403,7 +478,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     CGFloat backgroundColorLocations[] = {0, 1};
     CGGradientRef backgroundGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_backgroundColors, backgroundColorLocations);
     
-    CGPoint topCenter = CGPointMake(CGRectGetMidX(currentBounds), 0.f);
+    CGPoint topCenter = CGPointMake(CGRectGetMidX(currentBounds), 0);
     CGPoint midCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMidY(currentBounds));
     CGContextDrawLinearGradient(context, backgroundGradient, topCenter, midCenter, 0);
     

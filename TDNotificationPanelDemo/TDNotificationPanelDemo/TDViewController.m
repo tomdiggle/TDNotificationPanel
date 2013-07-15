@@ -30,7 +30,7 @@
     [TDNotificationPanel showNotificationInView:self.view
                                            type:TDNotificationTypeError
                                           title:@"Error Notification"
-                                       subtitle:nil
+                                       subtitle:@"Subtitle"
                                  hideAfterDelay:3];
 }
 
@@ -56,13 +56,32 @@
 {
     TDNotificationPanel *panel = [TDNotificationPanel showNotificationInView:self.view
                                                                     animated:YES];
-    [panel setTitleText:@"Long Task"];
-    [panel setSubtitleText:@"with subtitles"];
+    [panel setTitleText:@"Posting Message"];
+//    [panel setSubtitleText:@"Subtitle"];
     [panel setNotificationType:TDNotificationTypeMessage];
+    [panel setNotificationMode:TDNotificationModeProgressBar];
     [panel setDismissable:NO];
     
-    double delayInSeconds = 5.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_queue_t fillProgressIndicatorQueue = dispatch_queue_create("com.TomDiggle.TDNotificatioPanelDemo.fillProgressIndicatorQueue", NULL);
+	dispatch_async(fillProgressIndicatorQueue, ^{
+        // This just increases the progress indicator in a loop
+        float progress = 0.0f;
+        while (progress < 1.0f)
+        {
+            progress += 0.01f;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[panel progressIndicator] setProgress:progress];
+            });
+            usleep(50000);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the title to show task has been completed.
+            [panel setTitleText:@"Message Posted"];
+        });
+	});
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6.0 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [TDNotificationPanel hideNotificationInView:self.view
                                                 animated:YES];
