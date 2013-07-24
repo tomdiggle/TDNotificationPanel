@@ -26,7 +26,6 @@
 #import "TDNotificationPanel.h"
 
 #import <CoreGraphics/CoreGraphics.h>
-#import <QuartzCore/QuartzCore.h>
 
 static const CGFloat kXPadding = 20.f;
 static const CGFloat kYPadding = 10.f;
@@ -40,6 +39,8 @@ static const CGFloat kSubtitleFontSize = 12.f;
 @property (nonatomic, strong) UILabel *subtitle;
 @property (nonatomic, strong) NSArray *backgroundColors;
 @property (nonatomic, strong) UIImageView *icon;
+@property (nonatomic, strong) UIProgressView *indicator;
+@property (nonatomic, assign) CGSize totalSize;
 
 @end
 
@@ -47,42 +48,34 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 #pragma mark - Class Methods
 
-+ (instancetype)showNotificationInView:(UIView *)view type:(TDNotificationType)type title:(NSString *)title subtitle:(NSString *)subtitle hideAfterDelay:(NSTimeInterval)delay
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissable:(BOOL)dismissable hideAfterDelay:(NSTimeInterval)delay
 {
-    TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
-    [panel setNotificationType:type];
-    [panel setTitleText:title];
-    [panel setSubtitleText:subtitle];
+    TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view
+                                                                     title:title
+                                                                   subtitle:subtitle
+                                                                       type:type
+                                                                       mode:mode
+                                                                dismissable:dismissable];
     [view addSubview:panel];
-    [panel show:YES];
-    [panel hide:YES afterDelay:delay];
+    [panel show];
+    [panel hideAfterDelay:delay];
     
     return panel;
 }
 
-+ (instancetype)showNotificationInView:(UIView *)view animated:(BOOL)animated
-{
-    TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view];
-    [view addSubview:panel];
-    [panel show:animated];
-    
-    return panel;
-}
-
-+ (BOOL)hideNotificationInView:(UIView *)view animated:(BOOL)animated
++ (BOOL)hideNotificationInView:(UIView *)view
 {
     TDNotificationPanel *panel = [TDNotificationPanel notificationInView:view];
     if (panel)
     {
-        [panel hide:animated];
-        
+        [panel hide];
         return YES;
     }
     
     return NO;
 }
 
-+ (TDNotificationPanel *)notificationInView:(UIView *)view
++ (instancetype)notificationInView:(UIView *)view
 {
     NSEnumerator *subviews = [[view subviews] reverseObjectEnumerator];
     for (UIView *view in subviews)
@@ -112,32 +105,32 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 #pragma mark - Initializers
 
-- (id)initWithView:(UIView *)view
+- (id)initWithView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissable:(BOOL)dismissable
 {
-    NSAssert(view, @"view must not be nil.");
-    return [self initWithFrame:[view bounds]];
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    if (!(self = [super initWithFrame:frame])) return nil;
+    if (!(self = [super initWithFrame:[view bounds]])) return nil;
     
-    _titleText = nil;
+    _titleText = title;
     _titleFont = [UIFont boldSystemFontOfSize:kTitleFontSize];
     
-    _subtitleText = nil;
+    _subtitleText = subtitle;
     _subtitleFont = [UIFont systemFontOfSize:kSubtitleFontSize];
     
-    _notificationMode = TDNotificationModeText;
-    _dismissable = YES;
+    _notificationType = type;
+    _notificationMode = mode;
+    
+    _dismissable = dismissable;
+    
+    _progress = 0;
     
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [self setOpaque:NO];
     [self setBackgroundColor:[UIColor clearColor]];
     [self setAlpha:0];
     
-    [self setupLabels];
+    [self setupElements];
+    [self setupIconAndBackgroundColor];
     [self registerForKVO];
+    [self positionElements];
     
     return self;
 }
@@ -151,7 +144,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 #pragma mark - Setup
 
-- (void)setupLabels
+- (void)setupElements
 {
     _title = [[UILabel alloc] initWithFrame:CGRectZero];
     [_title setText:_titleText];
@@ -164,7 +157,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [self addSubview:_title];
     
     _subtitle = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_subtitle setText:_titleText];
+    [_subtitle setText:_subtitleText];
     [_subtitle setAdjustsFontSizeToFitWidth:NO];
     [_subtitle setTextAlignment:NSTextAlignmentLeft];
     [_subtitle setLineBreakMode:NSLineBreakByWordWrapping];
@@ -175,119 +168,21 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [_subtitle setFont:_subtitleFont];
     [self addSubview:_subtitle];
     
-    _icon = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [self addSubview:_icon];
-}
-
-#pragma mark - Show & Hide 
-
-- (void)show:(BOOL)animated
-{
-    NSArray *subviews = [[self superview] subviews];
-    for (id view in [subviews reverseObjectEnumerator])
+    if (_notificationMode == TDNotificationModeText)
     {
-        if ([view isKindOfClass:NSClassFromString(@"TDNotificationPanel")] && ![view isEqual:self])
-        {
-            // If a notification panel is already displaying hide it before showing the new one.
-            [view hide:YES];
-        }
+        _icon = [[UIImageView alloc] initWithFrame:CGRectZero];
+        [_icon setBackgroundColor:[UIColor clearColor]];
+        [self addSubview:_icon];
     }
-    
-    if (animated)
+    else if (_notificationMode == TDNotificationModeProgressBar)
     {
-        CATransition *transition = [CATransition animation];
-        [transition setDuration:0.3];
-        [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        [transition setType:kCATransitionPush];
-        [transition setSubtype:kCATransitionFromBottom];
-        [[self layer] addAnimation:transition forKey:nil];
-    }
-    
-    [self setAlpha:1.f];
-}
-
-- (void)hide:(BOOL)animated
-{
-    if (animated)
-    {
-        CATransition *transition = [CATransition animation];
-        [transition setDuration:0.3];
-        [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        [transition setType:kCATransitionPush];
-        [transition setSubtype:kCATransitionFromTop];
-        [[self layer] addAnimation:transition forKey:nil];
-        [self setFrame:CGRectMake(0.f, -self.frame.size.height, self.frame.size.width, self.frame.size.height)];
-        
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-            [self removeFromSuperview];
-        });
-    }
-    else
-    {
-       [self removeFromSuperview]; 
+        _indicator = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        [_indicator setFrame:CGRectZero];
+        [self addSubview:_indicator];
     }
 }
 
-- (void)hide:(BOOL)animated afterDelay:(NSTimeInterval)delay
-{
-    [self performSelector:@selector(hide:) withObject:@(animated) afterDelay:delay];
-}
-
-#pragma mark - KVO
-
-- (NSArray *)observableKeyPaths
-{
-    return @[@"notificationType", @"notificationMode", @"titleText", @"titleFont", @"subtitleText", @"subtitleFont"];
-}
-
-- (void)registerForKVO
-{
-    [[self observableKeyPaths] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self addObserver:self forKeyPath:obj options:NSKeyValueObservingOptionNew context:NULL];
-    }];
-}
-
-- (void)unregisterFromKVO
-{
-    [[self observableKeyPaths] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [self removeObserver:self forKeyPath:obj];
-    }];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"notificationType"])
-    {
-        [self updateIconAndBackground];
-    }
-    else if ([keyPath isEqualToString:@"notificationMode"])
-    {
-        [self updateIndicators];
-    }
-    else if ([keyPath isEqualToString:@"titleText"])
-    {
-        [_title setText:_titleText];
-        [self setNeedsLayout];
-    }
-    else if ([keyPath isEqualToString:@"titleFont"])
-    {
-        [_title setFont:_titleFont];
-    }
-    else if ([keyPath isEqualToString:@"subtitleText"])
-    {
-        [_subtitle setText:_subtitleText];
-        [self setNeedsLayout];
-    }
-    else if ([keyPath isEqualToString:@"subtitleFont"])
-    {
-        [_subtitle setFont:_subtitleFont];
-    }
-}
-
-#pragma mark - Update Icon and Background
-
-- (void)updateIconAndBackground
+- (void)setupIconAndBackgroundColor
 {
     UIColor *startColor = nil;
     UIColor *endColor = nil;
@@ -312,23 +207,120 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _backgroundColors = @[(id)startColor.CGColor, (id)endColor.CGColor];
 }
 
-- (void)updateIndicators
+#pragma mark - Show & Hide 
+
+- (void)show
 {
-    if (_notificationMode == TDNotificationModeText)
+    NSArray *subviews = [[self superview] subviews];
+    for (id view in [subviews reverseObjectEnumerator])
     {
-        [_progressIndicator removeFromSuperview];
-        _progressIndicator = nil;
+        if ([view isKindOfClass:NSClassFromString(@"TDNotificationPanel")] && ![view isEqual:self])
+        {
+            // If a notification panel is already displaying hide it before showing the new one.
+            [view hide];
+        }
     }
-    else if (_notificationMode == TDNotificationModeProgressBar)
+    
+    self.frame = CGRectMake(0, -_totalSize.height, _totalSize.width, _totalSize.height);
+
+    CGFloat verticalOffset = 0;
+    if ([[self superview] isKindOfClass:NSClassFromString(@"UIWindow")])
     {
-        // No icon will be shown when a progress indicator is being displayed.
-        [_icon removeFromSuperview];
-        _icon = nil;
+        if (![UIApplication sharedApplication].statusBarHidden)
+        {
+            // Position under the status bar.
+            verticalOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
+        }
         
-        _progressIndicator = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        [_progressIndicator setFrame:CGRectZero];
-        [self addSubview:_progressIndicator];
+        UIWindow *parent = (UIWindow *)self.superview;
+        if ([[parent rootViewController] isKindOfClass:NSClassFromString(@"UINavigationController")])
+        {
+            UINavigationController *navigationController = (UINavigationController *)parent.rootViewController;
+            if (!navigationController.navigationBarHidden)
+            {
+                // Position under the navigation controller's navigation bar.
+                verticalOffset += navigationController.navigationBar.frame.size.height;
+            }
+            
+            // Display the view under the navigation controller's navigation bar so the animation's appear
+            // below the navigation bar and the panel can persist accross views.
+            [self removeFromSuperview];
+            [[navigationController view] insertSubview:self
+                                          belowSubview:navigationController.navigationBar];
+        }
     }
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self setCenter:CGPointMake(self.center.x, verticalOffset + self.bounds.size.height - self.frame.size.height / 2)];
+        [self setAlpha:1.0];
+    }];
+}
+
+- (void)hide
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        [self setCenter:CGPointMake(self.center.x, -self.frame.size.height / 2)];
+        [self setAlpha:0];
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+}
+
+- (void)hideAfterDelay:(NSTimeInterval)delay
+{
+    [self performSelector:@selector(hide) withObject:nil afterDelay:delay];
+}
+
+#pragma mark - KVO
+
+- (NSArray *)observableKeyPaths
+{
+    return @[@"titleText", @"titleFont", @"subtitleText", @"subtitleFont", @"progress"];
+}
+
+- (void)registerForKVO
+{
+    [[self observableKeyPaths] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self addObserver:self forKeyPath:obj options:NSKeyValueObservingOptionNew context:NULL];
+    }];
+}
+
+- (void)unregisterFromKVO
+{
+    [[self observableKeyPaths] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self removeObserver:self forKeyPath:obj];
+    }];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"titleText"])
+    {
+        [_title setText:_titleText];
+    }
+    else if ([keyPath isEqualToString:@"titleFont"])
+    {
+        [_title setFont:_titleFont];
+    }
+    else if ([keyPath isEqualToString:@"subtitleText"])
+    {
+        [_subtitle setText:_subtitleText];
+    }
+    else if ([keyPath isEqualToString:@"subtitleFont"])
+    {
+        [_subtitle setFont:_subtitleFont];
+    }
+    else if ([keyPath isEqualToString:@"progress"])
+    {
+        if ([_indicator respondsToSelector:@selector(setProgress:)])
+        {
+            [_indicator setProgress:_progress];
+        }
+        
+        return;
+    }
+    
+    [self positionElements];
 }
 
 #pragma mark - Handling Touch
@@ -339,46 +331,17 @@ static const CGFloat kSubtitleFontSize = 12.f;
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
-    [self hide:YES];
+    [self hide];
 }
 
 #pragma mark - Layout
 
-- (void)layoutSubviews
+- (void)positionElements
 {
-    [super layoutSubviews];
-    
-    CGPoint position = CGPointZero;
-    
-    if ([[self superview] isKindOfClass:NSClassFromString(@"UIWindow")])
-    {
-        if (![UIApplication sharedApplication].statusBarHidden)
-        {
-            // Position under the status bar.
-            position.y = [UIApplication sharedApplication].statusBarFrame.size.height;
-        }
-        
-        UIWindow *parent = (UIWindow *)self.superview;
-        if ([[parent rootViewController] isKindOfClass:NSClassFromString(@"UINavigationController")])
-        {
-            UINavigationController *navigationController = (UINavigationController *)parent.rootViewController;
-            if (!navigationController.navigationBarHidden)
-            {
-                // Position under the navigation controller's navigation bar.
-                position.y += navigationController.navigationBar.frame.size.height;
-            }
-            
-            // Display the view under the navigation controller's navigation bar so the animation's appear
-            // below the navigation bar and the panel can persist accross views.
-            [self removeFromSuperview];
-            [[navigationController view] insertSubview:self
-                                          belowSubview:navigationController.navigationBar];
-        }
-    }
-
     // Determine the total width of the notification.
-    CGSize totalSize = CGSizeZero;
-    totalSize.width = self.bounds.size.width;
+    CGSize size = CGSizeZero;
+    size.width = self.bounds.size.width;
+    size.height = kYPadding;
     
     // Icon
     if ([_icon image])
@@ -394,9 +357,11 @@ static const CGFloat kSubtitleFontSize = 12.f;
         title.origin.y = kYPadding;
         
         CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
-        titleSize.width = MIN(titleSize.width, totalSize.width - title.origin.x - kXPadding);
+        titleSize.width = MIN(titleSize.width, size.width - title.origin.x - kXPadding);
         title.size = titleSize;
         _title.frame = title;
+        
+        size.height += CGRectGetHeight(_title.frame);
     }
     
     // Progress indicator
@@ -414,59 +379,53 @@ static const CGFloat kSubtitleFontSize = 12.f;
         }
         
         progress.size.width = self.bounds.size.width - kXPadding * 2;
-        [_progressIndicator setFrame:progress];
-    }
-    
-    // Subtitle
-    CGRect subtitle = CGRectZero;
-    subtitle.origin.x = _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kXPadding;
-    if (_notificationMode == TDNotificationModeProgressBar)
-    {
-        subtitle.origin.y = CGRectGetMaxY([_progressIndicator frame]) + kSpacing;
-    }
-    else
-    {
-        subtitle.origin.y = CGRectGetMaxY(_title.frame) + kSpacing;
-    }
-    
-    CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
-    subtitleSize.width = MIN(subtitleSize.width, totalSize.width - subtitle.origin.x - kXPadding);
-    subtitle.size = subtitleSize;
-    _subtitle.frame = subtitle;
-    [_subtitle sizeToFit];
-    
-    // Determine the total height of the notification.
-    if (_notificationMode == TDNotificationModeProgressBar)
-    {
-        totalSize.height += CGRectGetMaxY(_progressIndicator.frame) + CGRectGetHeight(_progressIndicator.frame);
+        [_indicator setFrame:progress];
+        
+        size.height += CGRectGetHeight(_indicator.frame);
         
         if (_titleText)
         {
-            totalSize.height += CGRectGetHeight(_title.frame);
+            size.height += kSpacing;
         }
-        
-        if (_subtitleText)
+    }
+    
+    // Subtitle
+    if (_subtitleText)
+    {
+        CGRect subtitle = CGRectZero;
+        subtitle.origin.x = _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kXPadding;
+        if (_notificationMode == TDNotificationModeProgressBar)
         {
-            totalSize.height += CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
+            subtitle.origin.y = CGRectGetMaxY([_indicator frame]) + kSpacing;
         }
         else
         {
-            totalSize.height += CGRectGetMaxY(_title.frame) + kYPadding;
+            subtitle.origin.y = CGRectGetMaxY(_title.frame) + kSpacing;
+        }
+        
+        CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
+        subtitleSize.width = MIN(subtitleSize.width, size.width - subtitle.origin.x - kXPadding);
+        subtitle.size = subtitleSize;
+        _subtitle.frame = subtitle;
+        [_subtitle sizeToFit];
+        
+        size.height += CGRectGetHeight(_subtitle.frame);
+        
+        if (_titleText)
+        {
+            size.height += kSpacing;
         }
     }
-    else if (_subtitleText || ![_icon image])
+    
+    size.height += kYPadding;
+    
+    if (!CGRectContainsRect(CGRectMake(0, 0, size.width, size.height), _icon.frame))
     {
-        totalSize.height = CGRectGetMaxY(_title.frame) + CGRectGetHeight(_title.frame) + CGRectGetMaxY(_subtitle.frame) + CGRectGetHeight(_subtitle.frame);
-    }
-    else
-    {
-        // When no subtitle is being shown increase the y offset of the title frame so it's more center.
+        size.height = CGRectGetHeight(_icon.frame) + kYPadding * 2;
         _title.frame = CGRectOffset(_title.frame, 0, CGRectGetMinY(_title.frame) / 2);
-        
-        totalSize.height = CGRectGetMaxY(_icon.frame) + CGRectGetHeight(_icon.frame) + CGRectGetMaxY(_title.frame);
     }
     
-    self.frame = CGRectMake(position.x, position.y, totalSize.width, totalSize.height);
+    _totalSize = size;
 }
 
 - (void)drawRect:(CGRect)rect
@@ -478,9 +437,9 @@ static const CGFloat kSubtitleFontSize = 12.f;
     CGFloat backgroundColorLocations[] = {0, 1};
     CGGradientRef backgroundGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_backgroundColors, backgroundColorLocations);
     
-    CGPoint topCenter = CGPointMake(CGRectGetMidX(currentBounds), 0);
-    CGPoint midCenter = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMidY(currentBounds));
-    CGContextDrawLinearGradient(context, backgroundGradient, topCenter, midCenter, 0);
+    CGPoint top = CGPointMake(CGRectGetMidX(currentBounds), 0);
+    CGPoint bottom = CGPointMake(CGRectGetMidX(currentBounds), CGRectGetMaxY(currentBounds));
+    CGContextDrawLinearGradient(context, backgroundGradient, top, bottom, 0);
     
     CGGradientRelease(backgroundGradient);
     CGColorSpaceRelease(colorSpace);
