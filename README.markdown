@@ -1,5 +1,5 @@
 # TDNotificationPanel
-TDNotificationPanel is a drop in class that displays a notification panel with a label and subtitle.
+TDNotificationPanel is a drop in class that displays a notification which can contain a title, subtitle, icon or progress bar.
 
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.jpg)
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.jpg)
