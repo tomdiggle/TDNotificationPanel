@@ -1,20 +1,29 @@
 # TDNotificationPanel
 TDNotificationPanel is a drop in class that displays a notification panel with a label and subtitle.
 
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.png)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-info.png)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.png)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.png)
+[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.jpg)
+[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.jpg)
+[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-message-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-message.jpg)
+[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar.jpg)
 
 ## Requirements
-TDNotificationPanel has been tested on iOS 6+ and is compatible with ARC projects. It depends on the following Apple frameworks:
+TDNotificationPanel has been tested on iOS 6+ and requires ARC. It depends on the following Apple frameworks:
 
 - Foundation.framework
 - UIKit.framework
 - CoreGraphics.framework
-- QuartzCore.framework
 
 ## Adding TDNotificationPanel To Your Project
-Add the following source files `TDNotificationPanel.h` and `TDNotificationPanel.m` located in `TDNotificationPanel` directory to your project. Then include TDNotificationPanel wherever you need it with `#import "TDNotificationPanel.h"`.
+
+### CocoaPods
+[CocoaPods](http://cocoapods.org/) is the recommended way to add TDNotificationPanel to your project.
+
+1. Add a pod entry for TDNotificationPanel to your Podfile pod 'TDNotificationPanel', '~> 0.3'
+2. Install the pod(s) by running pod install.
+3. Include TDNotificationPanel wherever you need it with `#import "TDNotificationPanel.h"`.
+
+### Source Files
+Add the following files located in `TDNotificationPanel` directory to your project. Then include TDNotificationPanel wherever you need it with `#import "TDNotificationPanel.h"`.
 
 ## Usage
 There are 3 different notification types these are:
@@ -23,33 +32,48 @@ There are 3 different notification types these are:
 - TDNotificationTypeMessage
 - TDNotificationTypeSuccess
 
+There are 2 different notification modes these are:
+
+- TDNotificationModeText
+- TDNotificationModeProgressBar
+
+
+TDNotificationModeProgressBar mode will display a UIProgressView between the title and subtitle.
+
 To display a notification panel use the following method:
 
 ```
 [TDNotificationPanel showNotificationInView:self.view
-									   type:TDNotificationTypeError
-									  title:@"Error Notification"
-								   subtitle:@"Subtitle for notification"
-							 hideAfterDelay:3];
+                                      title:@"Notification Title"
+                                   subtitle:@"Notification Subtitle"
+                                       type:TDNotificationTypeError
+                                       mode:TDNotificationModeText
+                                dismissable:YES
+                             hideAfterDelay:3];
 ```
 
-If you need to run a long task use the following method:
+If you need to run a long task with a progress bar use the following method:
 
 ```
-TDNotificationPanel *panel = [TDNotificationPanel showNotificationInView:self.view
-                                                                animated:YES];
-[panel setTitleText:@"Long Task"];
-[panel setSubtitle:@"Subtitle for notification"];
-[panel setNotificationType:TDNotificationTypeSuccess];
+TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:self.view
+                                                                 title:@"Posting Message"
+                                                              subtitle:nil
+                                                                  type:TDNotificationTypeMessage
+                                                                  mode:TDNotificationModeProgressBar
+                                                           dismissable:NO];
+[[self view] addSubview:panel];
+[panel show];
 
 [self longRunningTaskWithProgress:^(float)progress {
-
+    [panel setProgress:progress];
 } completion:^{
-	[TDNotificationPanel hideNotificationInView:self.view
-                                       animated:YES];
+	[panel hideAfterDelay:3];
 }];
 
 ```
+
+## Credits
+The icons used are from the [ikonic](http://radesign.in/ikonic-150-vector-icons-25-free/) icon set.
 
 ## License
 
