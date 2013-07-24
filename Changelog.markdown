@@ -1,3 +1,21 @@
+### Version 0.3
+
+*Released on 24.07.2013*
+
+Added icon to TDNotificationTypeError
+
+Added icon to TDNotificationTypeSuccess
+
+Added mode to display a progress bar
+
+Added option to display subtitles
+
+Title, subtitle and icon are now left aligned
+
+Support for CocoaPods
+
+Fixed notification height bug
+
 ### Version 0.2
 
 *Released on 03.07.2013*
@@ -9,8 +27,6 @@ Added a class method to return an array of notification panels from a given view
 Added support for showing a notification panel in a UIWindow
 
 When showing a notification panel if a panel already exists in the same view then it will be hidden before showing the new panel
-
-Support for CocoaPods
 
 ### Version 0.1
 
