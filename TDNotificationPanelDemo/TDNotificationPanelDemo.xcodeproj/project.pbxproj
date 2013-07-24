@@ -22,7 +22,6 @@
 		32EA279816D1346400BB528E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32EA279616D1346400BB528E /* MainStoryboard.storyboard */; };
 		32EA279B16D1346400BB528E /* TDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EA279A16D1346400BB528E /* TDViewController.m */; };
 		32EA27A816D1359900BB528E /* TDNotificationPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EA27A516D1359900BB528E /* TDNotificationPanel.m */; };
-		32EA27AA16D1361300BB528E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EA27A916D1361300BB528E /* QuartzCore.framework */; };
 		32EA27AB16D2B1BF00BB528E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EA278216D1346400BB528E /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +48,6 @@
 		32EA279A16D1346400BB528E /* TDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDViewController.m; sourceTree = "<group>"; };
 		32EA27A416D1359900BB528E /* TDNotificationPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDNotificationPanel.h; sourceTree = "<group>"; };
 		32EA27A516D1359900BB528E /* TDNotificationPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDNotificationPanel.m; sourceTree = "<group>"; };
-		32EA27A916D1361300BB528E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +55,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32EA27AA16D1361300BB528E /* QuartzCore.framework in Frameworks */,
 				32EA277F16D1346400BB528E /* UIKit.framework in Frameworks */,
 				32EA278116D1346400BB528E /* Foundation.framework in Frameworks */,
 				32EA27AB16D2B1BF00BB528E /* CoreGraphics.framework in Frameworks */,
@@ -101,7 +98,6 @@
 			children = (
 				32EA278216D1346400BB528E /* CoreGraphics.framework */,
 				32EA278016D1346400BB528E /* Foundation.framework */,
-				32EA27A916D1361300BB528E /* QuartzCore.framework */,
 				32EA277E16D1346400BB528E /* UIKit.framework */,
 			);
 			name = Frameworks;
