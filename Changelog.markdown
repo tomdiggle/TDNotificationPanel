@@ -1,3 +1,15 @@
+### Version 0.3.2
+
+*Released on 25.07.2013*
+
+Fixed license warning with CocoaPods spec
+
+### Version 0.3.1
+
+*Released on 24.07.2013*
+
+Fixed source tag error with CocoaPods spec
+
 ### Version 0.3
 
 *Released on 24.07.2013*
