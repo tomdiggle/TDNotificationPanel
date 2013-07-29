@@ -27,8 +27,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    TDNotificationModeText,
-    TDNotificationModeProgressBar
+    TDNotificationModeActivityIndicator,
+    TDNotificationModeProgressBar,
+    TDNotificationModeText
 } TDNotificationMode;
 
 typedef enum {

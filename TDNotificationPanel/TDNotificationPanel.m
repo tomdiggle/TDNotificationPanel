@@ -39,7 +39,8 @@ static const CGFloat kSubtitleFontSize = 12.f;
 @property (nonatomic, strong) UILabel *subtitle;
 @property (nonatomic, strong) NSArray *backgroundColors;
 @property (nonatomic, strong) UIImageView *icon;
-@property (nonatomic, strong) UIProgressView *indicator;
+@property (nonatomic, strong) UIActivityIndicatorView *indicator;
+@property (nonatomic, strong) UIProgressView *progressBar;
 @property (nonatomic, assign) CGSize totalSize;
 
 @end
@@ -168,17 +169,23 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [_subtitle setFont:_subtitleFont];
     [self addSubview:_subtitle];
     
-    if (_notificationMode == TDNotificationModeText)
+    if (_notificationMode == TDNotificationModeActivityIndicator)
+    {
+        _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [_indicator setFrame:CGRectZero];
+        [self addSubview:_indicator];
+    }
+    else if (_notificationMode == TDNotificationModeProgressBar)
+    {
+        _progressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+        [_progressBar setFrame:CGRectZero];
+        [self addSubview:_progressBar];
+    }
+    else if (_notificationMode == TDNotificationModeText)
     {
         _icon = [[UIImageView alloc] initWithFrame:CGRectZero];
         [_icon setBackgroundColor:[UIColor clearColor]];
         [self addSubview:_icon];
-    }
-    else if (_notificationMode == TDNotificationModeProgressBar)
-    {
-        _indicator = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-        [_indicator setFrame:CGRectZero];
-        [self addSubview:_indicator];
     }
 }
 
@@ -250,6 +257,11 @@ static const CGFloat kSubtitleFontSize = 12.f;
         }
     }
     
+    if (_notificationMode == TDNotificationModeActivityIndicator)
+    {
+        [_indicator startAnimating];
+    }
+    
     [UIView animateWithDuration:0.3 animations:^{
         [self setCenter:CGPointMake(self.center.x, verticalOffset + self.bounds.size.height - self.frame.size.height / 2)];
         [self setAlpha:1.0];
@@ -312,9 +324,9 @@ static const CGFloat kSubtitleFontSize = 12.f;
     }
     else if ([keyPath isEqualToString:@"progress"])
     {
-        if ([_indicator respondsToSelector:@selector(setProgress:)])
+        if ([_progressBar respondsToSelector:@selector(setProgress:)])
         {
-            [_indicator setProgress:_progress];
+            [_progressBar setProgress:_progress];
         }
         
         return;
@@ -414,6 +426,22 @@ static const CGFloat kSubtitleFontSize = 12.f;
         if (_titleText)
         {
             size.height += kSpacing;
+        }
+    }
+    
+    // Activity Indicator
+    if (_notificationMode == TDNotificationModeActivityIndicator)
+    {
+        [_indicator setFrame:CGRectMake(kXPadding, kYPadding, 20, 20)];
+        
+        if (_titleText)
+        {
+            [_title setFrame:CGRectMake(_title.frame.origin.x + CGRectGetWidth(_indicator.frame) + kXPadding, _title.frame.origin.y, _title.frame.size.width, _title.frame.size.height)];
+        }
+        
+        if (_subtitle)
+        {
+            [_subtitle setFrame:CGRectMake(_subtitle.frame.origin.x + CGRectGetWidth(_indicator.frame) + kXPadding, _subtitle.frame.origin.y, _subtitle.frame.size.width, _subtitle.frame.size.height)];
         }
     }
     
