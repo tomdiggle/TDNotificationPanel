@@ -195,20 +195,20 @@ static const CGFloat kSubtitleFontSize = 12.f;
     UIColor *endColor = nil;
     if (_notificationType == TDNotificationTypeError)
     {
-        startColor = [UIColor colorWithRed:1 green:0.102 blue:0 alpha:0.750];
-        endColor = [UIColor colorWithRed:0.804 green:0 blue:0 alpha:0.750];
+        startColor = [UIColor colorWithRed:1 green:0.102 blue:0 alpha:0.900];
+        endColor = [UIColor colorWithRed:0.804 green:0 blue:0 alpha:0.900];
         [_icon setImage:[UIImage imageNamed:@"errorIcon"]];
     }
     else if (_notificationType == TDNotificationTypeMessage)
     {
-        startColor = [UIColor colorWithRed:0.290 green:0.607 blue:0.917 alpha:0.750];
-        endColor = [UIColor colorWithRed:0.121 green:0.482 blue:0.898 alpha:0.750];
+        startColor = [UIColor colorWithRed:0.290 green:0.607 blue:0.917 alpha:0.900];
+        endColor = [UIColor colorWithRed:0.121 green:0.482 blue:0.898 alpha:0.900];
         [_icon setImage:nil];
     }
     else if (_notificationType == TDNotificationTypeSuccess)
     {
-        startColor = [UIColor colorWithRed:0.356 green:0.650 blue:0 alpha:0.750];
-        endColor = [UIColor colorWithRed:0.192 green:0.635 blue:0 alpha:0.750];
+        startColor = [UIColor colorWithRed:0.356 green:0.650 blue:0 alpha:0.900];
+        endColor = [UIColor colorWithRed:0.192 green:0.635 blue:0 alpha:0.900];
         [_icon setImage:[UIImage imageNamed:@"successIcon"]];
     }
     _backgroundColors = @[(id)startColor.CGColor, (id)endColor.CGColor];
