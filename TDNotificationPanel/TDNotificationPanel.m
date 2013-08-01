@@ -191,27 +191,31 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (void)setupIconAndBackgroundColor
 {
-    UIColor *startColor = nil;
-    UIColor *endColor = nil;
+    UIColor *startGradient = nil;
+    UIColor *endGradient = nil;
+    UIColor *bottomBorder = nil;
     if (_notificationType == TDNotificationTypeError)
     {
-        startColor = [UIColor colorWithRed:1 green:0.102 blue:0 alpha:0.900];
-        endColor = [UIColor colorWithRed:0.804 green:0 blue:0 alpha:0.900];
+        startGradient = [UIColor colorWithRed:1 green:0.102 blue:0 alpha:0.900];
+        endGradient = [UIColor colorWithRed:0.804 green:0 blue:0 alpha:0.900];
+        bottomBorder = [UIColor colorWithRed:0.627 green:0 blue:0 alpha:1];
         [_icon setImage:[UIImage imageNamed:@"errorIcon"]];
     }
     else if (_notificationType == TDNotificationTypeMessage)
     {
-        startColor = [UIColor colorWithRed:0.290 green:0.607 blue:0.917 alpha:0.900];
-        endColor = [UIColor colorWithRed:0.121 green:0.482 blue:0.898 alpha:0.900];
+        startGradient = [UIColor colorWithRed:0.290 green:0.607 blue:0.917 alpha:0.900];
+        endGradient = [UIColor colorWithRed:0.121 green:0.482 blue:0.898 alpha:0.900];
+        bottomBorder = [UIColor colorWithRed:0.121 green:0.294 blue:0.898 alpha:1];
         [_icon setImage:nil];
     }
     else if (_notificationType == TDNotificationTypeSuccess)
     {
-        startColor = [UIColor colorWithRed:0.356 green:0.650 blue:0 alpha:0.900];
-        endColor = [UIColor colorWithRed:0.192 green:0.635 blue:0 alpha:0.900];
+        startGradient = [UIColor colorWithRed:0.356 green:0.650 blue:0 alpha:0.900];
+        endGradient = [UIColor colorWithRed:0.192 green:0.635 blue:0 alpha:0.900];
+        bottomBorder = [UIColor colorWithRed:0.192 green:0.390 blue:0 alpha:1];
         [_icon setImage:[UIImage imageNamed:@"successIcon"]];
     }
-    _backgroundColors = @[(id)startColor.CGColor, (id)endColor.CGColor];
+    _backgroundColors = @[(id)startGradient.CGColor, (id)endGradient.CGColor, (id)bottomBorder.CGColor];
 }
 
 #pragma mark - Show & Hide 
@@ -462,7 +466,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGRect currentBounds = self.bounds;
     
-    CGFloat backgroundColorLocations[] = {0, 1};
+    CGFloat backgroundColorLocations[] = {0, 0.98, 1};
     CGGradientRef backgroundGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)_backgroundColors, backgroundColorLocations);
     
     CGPoint top = CGPointMake(CGRectGetMidX(currentBounds), 0);
