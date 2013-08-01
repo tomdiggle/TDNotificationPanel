@@ -196,9 +196,9 @@ static const CGFloat kSubtitleFontSize = 12.f;
     UIColor *bottomBorder = nil;
     if (_notificationType == TDNotificationTypeError)
     {
-        startGradient = [UIColor colorWithRed:1 green:0.102 blue:0 alpha:0.900];
-        endGradient = [UIColor colorWithRed:0.804 green:0 blue:0 alpha:0.900];
-        bottomBorder = [UIColor colorWithRed:0.627 green:0 blue:0 alpha:1];
+        startGradient = [UIColor colorWithRed:0.900 green:0.102 blue:0 alpha:0.900];
+        endGradient = [UIColor colorWithRed:0.750 green:0 blue:0 alpha:0.900];
+        bottomBorder = [UIColor colorWithRed:0.550 green:0 blue:0 alpha:1];
         [_icon setImage:[UIImage imageNamed:@"errorIcon"]];
     }
     else if (_notificationType == TDNotificationTypeMessage)
