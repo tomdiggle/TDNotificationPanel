@@ -395,9 +395,9 @@ static const CGFloat kSubtitleFontSize = 12.f;
         }
         
         progress.size.width = self.bounds.size.width - kXPadding * 2;
-        [_indicator setFrame:progress];
+        [_progressBar setFrame:progress];
         
-        size.height += CGRectGetHeight(_indicator.frame);
+        size.height += CGRectGetHeight(_progressBar.frame);
         
         if (_titleText)
         {
