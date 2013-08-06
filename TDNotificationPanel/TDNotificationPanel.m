@@ -27,6 +27,14 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
+    #define TDTextAlignmentLeft NSTextAlignmentLeft
+    #define TDLineBreakByWordWrapping NSLineBreakByWordWrapping
+#else
+    #define TDTextAlignmentLeft UITextAlignmentLeft
+    #define TDLineBreakByWordWrapping UILineBreakModeWordWrap
+#endif
+
 static const CGFloat kXPadding = 20.f;
 static const CGFloat kYPadding = 10.f;
 static const CGFloat kSpacing = 4.f;
@@ -150,7 +158,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _title = [[UILabel alloc] initWithFrame:CGRectZero];
     [_title setText:_titleText];
     [_title setAdjustsFontSizeToFitWidth:NO];
-    [_title setTextAlignment:NSTextAlignmentLeft];
+    [_title setTextAlignment:TDTextAlignmentLeft];
     [_title setOpaque:NO];
     [_title setBackgroundColor:[UIColor clearColor]];
     [_title setTextColor:[UIColor whiteColor]];
@@ -160,8 +168,8 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _subtitle = [[UILabel alloc] initWithFrame:CGRectZero];
     [_subtitle setText:_subtitleText];
     [_subtitle setAdjustsFontSizeToFitWidth:NO];
-    [_subtitle setTextAlignment:NSTextAlignmentLeft];
-    [_subtitle setLineBreakMode:NSLineBreakByWordWrapping];
+    [_subtitle setTextAlignment:TDTextAlignmentLeft];
+    [_subtitle setLineBreakMode:TDLineBreakByWordWrapping];
     [_subtitle setNumberOfLines:0];
     [_subtitle setOpaque:NO];
     [_subtitle setBackgroundColor:[UIColor clearColor]];
