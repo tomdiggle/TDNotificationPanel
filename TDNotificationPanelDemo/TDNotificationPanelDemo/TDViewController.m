@@ -42,8 +42,8 @@
 - (IBAction)displayErrorNotificationButtonTapped:(id)sender
 {
     [TDNotificationPanel showNotificationInView:self.view
-                                          title:@"Error"
-                                       subtitle:@"Subtitle"
+                                          title:@"Network Error"
+                                       subtitle:@"Check your network connection."
                                            type:TDNotificationTypeError
                                            mode:TDNotificationModeText
                                     dismissable:YES
