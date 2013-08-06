@@ -363,9 +363,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 - (void)positionElements
 {
     // Determine the total width of the notification.
-    CGSize size = CGSizeZero;
-    size.width = self.bounds.size.width;
-    size.height = kYPadding;
+    CGSize size = { .width = self.bounds.size.width, .height = kYPadding };
     
     // Icon
     if ([_icon image])
@@ -376,10 +374,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     // Title
     if (_titleText)
     {
-        CGRect title = CGRectZero;
-        title.origin.x = _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kXPadding;
-        title.origin.y = kYPadding;
-        
+        CGRect title = { .origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding, .origin.y = kYPadding };
         CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
         titleSize.width = MIN(titleSize.width, size.width - title.origin.x - kXPadding);
         title.size = titleSize;
@@ -402,7 +397,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
             progress.origin.y = kYPadding;
         }
         
-        progress.size.width = self.bounds.size.width - kXPadding * 2;
+        progress.size.width = size.width - kXPadding * 2;
         [_progressBar setFrame:progress];
         
         size.height += CGRectGetHeight(_progressBar.frame);
@@ -417,10 +412,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
     if (_subtitleText)
     {
         CGRect subtitle = CGRectZero;
-        subtitle.origin.x = _icon.frame.origin.x + CGRectGetWidth(_icon.frame) + kXPadding;
+        subtitle.origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding;
         if (_notificationMode == TDNotificationModeProgressBar)
         {
-            subtitle.origin.y = CGRectGetMaxY([_indicator frame]) + kSpacing;
+            subtitle.origin.y = CGRectGetMaxY([_progressBar frame]) + kSpacing;
         }
         else
         {
@@ -448,12 +443,12 @@ static const CGFloat kSubtitleFontSize = 12.f;
         
         if (_titleText)
         {
-            [_title setFrame:CGRectMake(_title.frame.origin.x + CGRectGetWidth(_indicator.frame) + kXPadding, _title.frame.origin.y, _title.frame.size.width, _title.frame.size.height)];
+            [_title setFrame:CGRectMake(CGRectGetMinX(_title.frame) + CGRectGetWidth(_indicator.frame) + kXPadding, CGRectGetMinY(_title.frame), CGRectGetWidth(_title.frame), CGRectGetHeight(_title.frame))];
         }
         
         if (_subtitle)
         {
-            [_subtitle setFrame:CGRectMake(_subtitle.frame.origin.x + CGRectGetWidth(_indicator.frame) + kXPadding, _subtitle.frame.origin.y, _subtitle.frame.size.width, _subtitle.frame.size.height)];
+            [_subtitle setFrame:CGRectMake(CGRectGetMinX(_subtitle.frame) + CGRectGetWidth(_indicator.frame) + kXPadding, CGRectGetMinY(_subtitle.frame), CGRectGetWidth(_subtitle.frame), CGRectGetHeight(_subtitle.frame))];
         }
     }
     
