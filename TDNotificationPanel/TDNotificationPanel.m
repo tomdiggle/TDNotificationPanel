@@ -156,25 +156,24 @@ static const CGFloat kSubtitleFontSize = 12.f;
 - (void)setupElements
 {
     _title = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_title setText:_titleText];
-    [_title setAdjustsFontSizeToFitWidth:NO];
-    [_title setTextAlignment:TDTextAlignmentLeft];
-    [_title setOpaque:NO];
-    [_title setBackgroundColor:[UIColor clearColor]];
-    [_title setTextColor:[UIColor whiteColor]];
-    [_title setFont:_titleFont];
+    _title.text = _titleText;
+    _title.adjustsFontSizeToFitWidth = NO;
+    _title.textAlignment = TDTextAlignmentLeft;
+    _title.opaque = NO;
+    _title.backgroundColor = [UIColor clearColor];
+    _title.textColor = [UIColor whiteColor];
+    _title.font = _titleFont;
     [self addSubview:_title];
     
     _subtitle = [[UILabel alloc] initWithFrame:CGRectZero];
-    [_subtitle setText:_subtitleText];
-    [_subtitle setAdjustsFontSizeToFitWidth:NO];
-    [_subtitle setTextAlignment:TDTextAlignmentLeft];
-    [_subtitle setLineBreakMode:TDLineBreakByWordWrapping];
-    [_subtitle setNumberOfLines:0];
-    [_subtitle setOpaque:NO];
-    [_subtitle setBackgroundColor:[UIColor clearColor]];
-    [_subtitle setTextColor:[UIColor whiteColor]];
-    [_subtitle setFont:_subtitleFont];
+    _subtitle.text = _subtitleText;
+    _subtitle.adjustsFontSizeToFitWidth = NO;
+    _subtitle.textAlignment = TDTextAlignmentLeft;
+    _subtitle.lineBreakMode = TDLineBreakByWordWrapping;
+    _subtitle.opaque = NO;
+    _subtitle.backgroundColor = [UIColor clearColor];
+    _subtitle.textColor = [UIColor whiteColor];
+    _subtitle.font = _subtitleFont;
     [self addSubview:_subtitle];
     
     if (_notificationMode == TDNotificationModeActivityIndicator)
