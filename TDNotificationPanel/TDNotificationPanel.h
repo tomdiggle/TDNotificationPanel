@@ -38,10 +38,16 @@ typedef enum {
     TDNotificationTypeSuccess,
 } TDNotificationType;
 
+/** 
+ * Displays a simple notification which can contain a title, subtitle, icon, progress bar or activity indicator.
+ *
+ * The notification will appear at the top of a view directly beneath any status or navigation bars.
+ */
+
 @interface TDNotificationPanel : UIView
 
 /**
- * The notification type that will be used to determine the color of the background & icon.
+ * The notification type that will be used to determine the color of the background & type of icon displayed.
  *
  * @see TDNotificationType
  */
@@ -80,8 +86,6 @@ typedef enum {
  * @see notificationMode
  */
 @property (nonatomic, assign) float progress;
-
-//@property (nonatomic, strong) UIProgressView *progressIndicator;
 
 /**
  * When set to YES notification will be dismissable when tapped. When set to NO notification will only be able to be dismissed using hideNotificationInView:animated method. Default is YES.
