@@ -170,6 +170,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _subtitle.adjustsFontSizeToFitWidth = NO;
     _subtitle.textAlignment = TDTextAlignmentLeft;
     _subtitle.lineBreakMode = TDLineBreakByWordWrapping;
+    _subtitle.numberOfLines = 0;
     _subtitle.opaque = NO;
     _subtitle.backgroundColor = [UIColor clearColor];
     _subtitle.textColor = [UIColor whiteColor];
@@ -387,15 +388,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     {
         CGRect progress = CGRectZero;
         progress.origin.x = kXPadding;
-        if (_titleText)
-        {
-            progress.origin.y = CGRectGetMaxY(_title.frame) + kSpacing;
-        }
-        else
-        {
-            progress.origin.y = kYPadding;
-        }
-        
+        progress.origin.y = _titleText ? CGRectGetMaxY(_title.frame) + kSpacing : kYPadding;
         progress.size.width = size.width - kXPadding * 2;
         [_progressBar setFrame:progress];
         
@@ -412,20 +405,12 @@ static const CGFloat kSubtitleFontSize = 12.f;
     {
         CGRect subtitle = CGRectZero;
         subtitle.origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding;
-        if (_notificationMode == TDNotificationModeProgressBar)
-        {
-            subtitle.origin.y = CGRectGetMaxY([_progressBar frame]) + kSpacing;
-        }
-        else
-        {
-            subtitle.origin.y = CGRectGetMaxY(_title.frame) + kSpacing;
-        }
-        
-        CGSize subtitleSize = [[_subtitle text] sizeWithFont:[_subtitle font]];
-        subtitleSize.width = MIN(subtitleSize.width, size.width - subtitle.origin.x - kXPadding);
-        subtitle.size = subtitleSize;
+        subtitle.origin.y = (_notificationMode == TDNotificationModeProgressBar) ? CGRectGetMaxY([_progressBar frame]) + kSpacing : CGRectGetMaxY(_title.frame) + kSpacing;
+        CGSize subtitleMaxSize = { .width = size.width - subtitle.origin.x - kXPadding, .height = CGRectGetHeight(self.bounds) };
+        subtitle.size = [[_subtitle text] sizeWithFont:_subtitle.font
+                                                    constrainedToSize:subtitleMaxSize
+                                               lineBreakMode:_subtitle.lineBreakMode];
         _subtitle.frame = subtitle;
-        [_subtitle sizeToFit];
         
         size.height += CGRectGetHeight(_subtitle.frame);
         
