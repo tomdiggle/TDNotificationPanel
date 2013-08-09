@@ -57,14 +57,14 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 #pragma mark - Class Methods
 
-+ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissable:(BOOL)dismissable hideAfterDelay:(NSTimeInterval)delay
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view
                                                                      title:title
                                                                    subtitle:subtitle
                                                                        type:type
                                                                        mode:mode
-                                                                dismissable:dismissable];
+                                                                dismissible:dismissible];
     [view addSubview:panel];
     [panel show];
     [panel hideAfterDelay:delay];
@@ -79,7 +79,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
                                                                   subtitle:subtitle
                                                                       type:type
                                                                       mode:mode
-                                                               dismissable:dismissible];
+                                                               dismissible:dismissible];
     [view addSubview:panel];
     [panel show];
     
@@ -128,7 +128,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 #pragma mark - Initializers
 
-- (id)initWithView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissable:(BOOL)dismissable
+- (id)initWithView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible
 {
     if (!(self = [super initWithFrame:[view bounds]])) return nil;
     
@@ -141,7 +141,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _notificationType = type;
     _notificationMode = mode;
     
-    _dismissable = dismissable;
+    _dismissible = dismissible;
     
     _progress = 0;
     
@@ -365,7 +365,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (!_dismissable) return;
+    if (!_dismissible) return;
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     

@@ -88,9 +88,9 @@ typedef enum {
 @property (nonatomic, assign) float progress;
 
 /**
- * When set to YES notification will be dismissable when tapped. When set to NO notification will only be able to be dismissed using hideNotificationInView:animated method. Default is YES.
+ * When set to YES notification will be dismissible when tapped. When set to NO notification will only be able to be dismissed using hideNotificationInView:animated method. Default is YES.
  */
-@property (nonatomic, assign, getter = isDismissable) BOOL dismissable;
+@property (nonatomic, assign, getter = isDismissible) BOOL dismissible;
 
 /**
  * Initializes a new notification, adds it to the provided view, shows it and then removes it after the delay given.
@@ -100,7 +100,7 @@ typedef enum {
  * @param subtitle The subtitle that will be displayed under the title.
  * @param type The notification type.
  * @param mode The notification mode.
- * @param dismissable The notification is dismissable by tapping.
+ * @param dismissible The notification is dismissible by tapping.
  * @param delay The delay in seconds before the notification will be removed.
  *
  * @return A reference to the created notification.
@@ -108,7 +108,7 @@ typedef enum {
  * @see TDNotificationType
  * @see TDNotificationMode
  */
-+ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissable:(BOOL)dismissable hideAfterDelay:(NSTimeInterval)delay;
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay;
 
 /**
  * Initializes a new notification, adds it to the provided view then displays it.
@@ -155,13 +155,13 @@ typedef enum {
  * @param subtitle The subtitle that will be displayed under the title.
  * @param type The notification type.
  * @param mode The notification mode.
- * @param dismissable The notification is dismissable by tapping.
+ * @param dismissible The notification is dismissible by tapping.
  *
  * @see notificationtype
  * @see notificationMode
- * @see dismissable
+ * @see dismissible
  */
-- (id)initWithView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissable:(BOOL)dismissable;
+- (id)initWithView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible;
 
 /**
  * Displays the notification.

@@ -46,7 +46,7 @@
                                        subtitle:@"Check your network connection."
                                            type:TDNotificationTypeError
                                            mode:TDNotificationModeText
-                                    dismissable:YES
+                                    dismissible:YES
                                  hideAfterDelay:3];
 }
 
@@ -57,7 +57,7 @@
                                        subtitle:nil
                                            type:TDNotificationTypeMessage
                                            mode:TDNotificationModeText
-                                    dismissable:YES
+                                    dismissible:YES
                                  hideAfterDelay:3];
 }
 
@@ -68,7 +68,7 @@
                                        subtitle:nil
                                            type:TDNotificationTypeSuccess
                                            mode:TDNotificationModeText
-                                    dismissable:YES
+                                    dismissible:YES
                                  hideAfterDelay:3];
 }
 
@@ -79,7 +79,7 @@
                                                                   subtitle:nil
                                                                       type:TDNotificationTypeMessage
                                                                       mode:TDNotificationModeProgressBar
-                                                               dismissable:NO];
+                                                               dismissible:NO];
     [[self view] addSubview:panel];
     [panel show];
     
@@ -115,7 +115,7 @@
                                        subtitle:nil
                                            type:TDNotificationTypeMessage
                                            mode:TDNotificationModeText
-                                    dismissable:YES
+                                    dismissible:YES
                                  hideAfterDelay:6];
 }
 
@@ -126,7 +126,7 @@
                                        subtitle:nil
                                            type:TDNotificationTypeMessage
                                            mode:TDNotificationModeActivityIndicator
-                                    dismissable:YES
+                                    dismissible:YES
                                  hideAfterDelay:3];
 }
 
