@@ -72,6 +72,20 @@ static const CGFloat kSubtitleFontSize = 12.f;
     return panel;
 }
 
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible
+{
+    TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view
+                                                                     title:title
+                                                                  subtitle:subtitle
+                                                                      type:type
+                                                                      mode:mode
+                                                               dismissable:dismissible];
+    [view addSubview:panel];
+    [panel show];
+    
+    return panel;
+}
+
 + (BOOL)hideNotificationInView:(UIView *)view
 {
     TDNotificationPanel *panel = [TDNotificationPanel notificationInView:view];
