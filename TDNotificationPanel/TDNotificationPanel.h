@@ -54,7 +54,7 @@ typedef enum {
 @property (nonatomic, assign) TDNotificationType notificationType;
 
 /**
- * The notification operation mode. The default is TDNotificationModeText.
+ * The notification operation mode. When using TDNotificationModeActivityIndicator or TDNotificationModeProgressBar the notification mode TDNotificationTypeMessage will be used.
  *
  * @see TDNotificationMode
  */
@@ -88,7 +88,7 @@ typedef enum {
 @property (nonatomic, assign) float progress;
 
 /**
- * When set to YES notification will be dismissible when tapped. When set to NO notification will only be able to be dismissed using hideNotificationInView:animated method. Default is YES.
+ * YES notification will be dismissible when tapped, NO notification will not be dismissible when tapped.
  */
 @property (nonatomic, assign, getter = isDismissible) BOOL dismissible;
 
