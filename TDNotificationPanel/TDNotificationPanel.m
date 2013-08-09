@@ -138,7 +138,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _subtitleText = subtitle;
     _subtitleFont = [UIFont systemFontOfSize:kSubtitleFontSize];
     
-    _notificationType = type;
+    _notificationType = (mode == TDNotificationModeText) ? type : TDNotificationTypeMessage;
     _notificationMode = mode;
     
     _dismissible = dismissible;
