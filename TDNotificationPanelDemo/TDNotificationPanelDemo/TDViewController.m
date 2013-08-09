@@ -119,4 +119,15 @@
                                  hideAfterDelay:6];
 }
 
+- (IBAction)displayActivityIndicatorNotification:(id)sender
+{
+    [TDNotificationPanel showNotificationInView:self.view
+                                          title:@"Importing media..."
+                                       subtitle:nil
+                                           type:TDNotificationTypeMessage
+                                           mode:TDNotificationModeActivityIndicator
+                                    dismissable:YES
+                                 hideAfterDelay:3];
+}
+
 @end
