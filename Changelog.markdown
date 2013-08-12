@@ -1,3 +1,9 @@
+### Version 0.4.1
+
+*Released on 12.08.2013*
+
+Fix shortened the pod spec summary to pass validation
+
 ### Version 0.4
 
 *Released on 12.08.2013*
