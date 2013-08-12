@@ -1,3 +1,21 @@
+### Version 0.4
+
+*Released on 12.08.2013*
+
+Added ability to display a notification with an activity indicator
+
+Added a small border to bottom of notification panel
+
+Added a new helper method showNotificationInView:title:subtitle:type:mode:dismissible:
+
+Added support for iOS 5 (Please note support has only been tested using the iPhone Simulator)
+
+Change increased the alpha of the background color from 0.750 to 0.900
+
+Change slightly darkened the background color of TDNotificationTypeError
+
+Fix typo of dismissible
+
 ### Version 0.3.2
 
 *Released on 25.07.2013*

@@ -1,10 +1,11 @@
 # TDNotificationPanel
-TDNotificationPanel is a drop in class that displays a notification which can contain a title, subtitle, icon or progress bar.
+TDNotificationPanel is a drop in class that displays a notification which can contain a title, subtitle, icon, progress bar or activity indicator.
 
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.jpg)
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.jpg)
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-message-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-message.jpg)
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar.jpg)
+[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-activityindicator-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-activityindicator.jpg)
 
 ## Requirements
 TDNotificationPanel has been tested on iOS 6+ and requires ARC. It depends on the following Apple frameworks:
@@ -18,7 +19,7 @@ TDNotificationPanel has been tested on iOS 6+ and requires ARC. It depends on th
 ### CocoaPods
 [CocoaPods](http://cocoapods.org/) is the recommended way to add TDNotificationPanel to your project.
 
-1. Add a pod entry for TDNotificationPanel to your Podfile pod 'TDNotificationPanel', '~> 0.3.2'
+1. Add a pod entry for TDNotificationPanel to your Podfile `pod 'TDNotificationPanel', '~> 0.4'`.
 2. Install the pod(s) by running pod install.
 3. Include TDNotificationPanel wherever you need it with `#import "TDNotificationPanel.h"`.
 
@@ -32,13 +33,14 @@ There are 3 different notification types these are:
 - TDNotificationTypeMessage
 - TDNotificationTypeSuccess
 
-There are 2 different notification modes these are:
+There are 3 different notification modes these are:
 
-- TDNotificationModeText
+- TDNotificationModeActivityIndicator
 - TDNotificationModeProgressBar
+- TDNotificationModeText
 
+Please note when using TDNotificationModeActivityIndicator and TDNotificationModeProgressBar the notification type TDNotificationTypeMessage will be used.
 
-TDNotificationModeProgressBar mode will display a UIProgressView between the title and subtitle.
 
 To display a notification panel use the following method:
 
