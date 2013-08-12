@@ -1,5 +1,5 @@
 // TDNotificationPanel.h
-// Version 0.4
+// Version 0.4.1
 // Created by Tom Diggle 08.02.2013
 
 /**
