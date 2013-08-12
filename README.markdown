@@ -50,7 +50,7 @@ To display a notification panel use the following method:
                                    subtitle:@"Notification Subtitle"
                                        type:TDNotificationTypeError
                                        mode:TDNotificationModeText
-                                dismissable:YES
+                                dismissible:YES
                              hideAfterDelay:3];
 ```
 
@@ -62,7 +62,7 @@ TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:self.view
                                                               subtitle:nil
                                                                   type:TDNotificationTypeMessage
                                                                   mode:TDNotificationModeProgressBar
-                                                           dismissable:NO];
+                                                           dismissible:NO];
 [[self view] addSubview:panel];
 [panel show];
 
