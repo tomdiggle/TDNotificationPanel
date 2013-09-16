@@ -35,6 +35,24 @@
     #define TDLineBreakByWordWrapping UILineBreakModeWordWrap
 #endif
 
+// Text size methods borrowed of MBProgressHUD by Jonathan George
+// https://github.com/jdg/MBProgressHUD
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+    #define MB_TEXTSIZE(text, font) [text length] > 0 ? [text \
+            sizeWithAttributes:@{NSFontAttributeName:font}] : CGSizeZero;
+#else
+    #define MB_TEXTSIZE(text, font) [text length] > 0 ? [text sizeWithFont:font] : CGSizeZero;
+#endif
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+    #define MB_MULTILINE_TEXTSIZE(text, font, maxSize, mode) [text length] > 0 ? [text \
+            boundingRectWithSize:maxSize options:(NSStringDrawingUsesLineFragmentOrigin) \
+            attributes:@{NSFontAttributeName:font} context:nil].size : CGSizeZero;
+#else
+    #define MB_MULTILINE_TEXTSIZE(text, font, maxSize, mode) [text length] > 0 ? [text \
+            sizeWithFont:font constrainedToSize:maxSize lineBreakMode:mode] : CGSizeZero;
+#endif
+
 static const CGFloat kXPadding = 20.f;
 static const CGFloat kYPadding = 10.f;
 static const CGFloat kSpacing = 4.f;
@@ -61,10 +79,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view
                                                                      title:title
-                                                                   subtitle:subtitle
-                                                                       type:type
-                                                                       mode:mode
-                                                                dismissible:dismissible];
+                                                                  subtitle:subtitle
+                                                                      type:type
+                                                                      mode:mode
+                                                               dismissible:dismissible];
     [view addSubview:panel];
     [panel show];
     [panel hideAfterDelay:delay];
@@ -240,7 +258,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _backgroundColors = @[(id)startGradient.CGColor, (id)endGradient.CGColor, (id)bottomBorder.CGColor];
 }
 
-#pragma mark - Show & Hide 
+#pragma mark - Show & Hide
 
 - (void)show
 {
@@ -255,7 +273,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     }
     
     self.frame = CGRectMake(0, -_totalSize.height, _totalSize.width, _totalSize.height);
-
+    
     CGFloat verticalOffset = 0;
     if ([[self superview] isKindOfClass:NSClassFromString(@"UIWindow")])
     {
@@ -372,41 +390,6 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [self hide];
 }
 
-#pragma mark - Text Size
-
-- (CGSize)textSize:(NSString *)text withFont:(UIFont *)font
-{
-    if ([text length] == 0)
-    {
-        return CGSizeZero;
-    }
-    else if ([text respondsToSelector:@selector(sizeWithAttributes:)])
-    {
-        return [text sizeWithAttributes:@{ NSFontAttributeName: font }];
-    }
-
-    return [text sizeWithFont:[_title font]];
-}
-
-- (CGSize)multilineTextSize:(NSString *)text withFont:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode
-{
-    if ([text length] == 0)
-    {
-        return CGSizeZero;
-    }
-    else if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
-    {
-        return [text boundingRectWithSize:size
-                                  options:(NSStringDrawingUsesLineFragmentOrigin)
-                               attributes:@{ NSFontAttributeName: font }
-                                  context:nil].size;
-    }
-    
-    return [text sizeWithFont:font
-            constrainedToSize:size
-                lineBreakMode:lineBreakMode];
-}
-
 #pragma mark - Layout
 
 - (void)positionElements
@@ -424,7 +407,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     if (_titleText)
     {
         CGRect title = { .origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding, .origin.y = kYPadding };
-        CGSize titleSize = [self textSize:self.titleText withFont:self.titleFont];
+        CGSize titleSize = MB_TEXTSIZE(self.titleText, self.titleFont);
         titleSize.width = MIN(titleSize.width, size.width - title.origin.x - kXPadding);
         title.size = titleSize;
         _title.frame = title;
@@ -456,10 +439,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
         subtitle.origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding;
         subtitle.origin.y = (_notificationMode == TDNotificationModeProgressBar) ? CGRectGetMaxY([_progressBar frame]) + kSpacing : CGRectGetMaxY(_title.frame) + kSpacing;
         CGSize subtitleMaxSize = { .width = size.width - subtitle.origin.x - kXPadding, .height = CGRectGetHeight(self.bounds) };
-        subtitle.size = [self multilineTextSize:self.subtitleText
-                                       withFont:self.subtitleFont
-                              constrainedToSize:subtitleMaxSize
-                                  lineBreakMode:[self.subtitle lineBreakMode]];
+        subtitle.size = MB_MULTILINE_TEXTSIZE(self.subtitleText, self.subtitleFont, subtitleMaxSize, [self.subtitle lineBreakMode]);
         _subtitle.frame = subtitle;
         
         size.height += CGRectGetHeight(_subtitle.frame);
