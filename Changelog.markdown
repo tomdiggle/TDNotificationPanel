@@ -1,3 +1,9 @@
+### Version 0.4.3
+
+*Released on 16.09.2013*
+
+Change now uses iOS 7 text size methods when deploying to iOS 7+, this time suppresses deprecation warnings
+
 ### Version 0.4.2
 
 *Released on 16.09.2013*
