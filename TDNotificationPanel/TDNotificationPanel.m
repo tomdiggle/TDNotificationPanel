@@ -372,6 +372,41 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [self hide];
 }
 
+#pragma mark - Text Size
+
+- (CGSize)textSize:(NSString *)text withFont:(UIFont *)font
+{
+    if ([text length] == 0)
+    {
+        return CGSizeZero;
+    }
+    else if ([text respondsToSelector:@selector(sizeWithAttributes:)])
+    {
+        return [text sizeWithAttributes:@{ NSFontAttributeName: font }];
+    }
+
+    return [text sizeWithFont:[_title font]];
+}
+
+- (CGSize)multilineTextSize:(NSString *)text withFont:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode
+{
+    if ([text length] == 0)
+    {
+        return CGSizeZero;
+    }
+    else if ([text respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)])
+    {
+        return [text boundingRectWithSize:size
+                                  options:(NSStringDrawingUsesLineFragmentOrigin)
+                               attributes:@{ NSFontAttributeName: font }
+                                  context:nil].size;
+    }
+    
+    return [text sizeWithFont:font
+            constrainedToSize:size
+                lineBreakMode:lineBreakMode];
+}
+
 #pragma mark - Layout
 
 - (void)positionElements
@@ -389,7 +424,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     if (_titleText)
     {
         CGRect title = { .origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding, .origin.y = kYPadding };
-        CGSize titleSize = [[_title text] sizeWithFont:[_title font]];
+        CGSize titleSize = [self textSize:self.titleText withFont:self.titleFont];
         titleSize.width = MIN(titleSize.width, size.width - title.origin.x - kXPadding);
         title.size = titleSize;
         _title.frame = title;
@@ -421,9 +456,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
         subtitle.origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding;
         subtitle.origin.y = (_notificationMode == TDNotificationModeProgressBar) ? CGRectGetMaxY([_progressBar frame]) + kSpacing : CGRectGetMaxY(_title.frame) + kSpacing;
         CGSize subtitleMaxSize = { .width = size.width - subtitle.origin.x - kXPadding, .height = CGRectGetHeight(self.bounds) };
-        subtitle.size = [[_subtitle text] sizeWithFont:_subtitle.font
-                                                    constrainedToSize:subtitleMaxSize
-                                               lineBreakMode:_subtitle.lineBreakMode];
+        subtitle.size = [self multilineTextSize:self.subtitleText
+                                       withFont:self.subtitleFont
+                              constrainedToSize:subtitleMaxSize
+                                  lineBreakMode:[self.subtitle lineBreakMode]];
         _subtitle.frame = subtitle;
         
         size.height += CGRectGetHeight(_subtitle.frame);
