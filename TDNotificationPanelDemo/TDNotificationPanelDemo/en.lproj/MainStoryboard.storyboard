@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4488.2" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="1Je-sW-veF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="1Je-sW-veF">
     <dependencies>
         <deployment defaultVersion="1280" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3715.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--View Controller - TDNotificationPanel Demo-->
@@ -136,7 +136,7 @@
         <scene sceneID="z0y-F3-lxL">
             <objects>
                 <navigationController definesPresentationContext="YES" id="1Je-sW-veF" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vzp-EO-XmA">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Vzp-EO-XmA">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
