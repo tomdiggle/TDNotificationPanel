@@ -269,27 +269,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
     CGFloat verticalOffset = 0;
     if ([[self superview] isKindOfClass:NSClassFromString(@"UIWindow")])
     {
+        // When displaying in a UIWindow position the notification under the status bar.
         if (![UIApplication sharedApplication].statusBarHidden)
         {
-            // Position under the status bar.
             verticalOffset = [UIApplication sharedApplication].statusBarFrame.size.height;
-        }
-        
-        UIWindow *parent = (UIWindow *)self.superview;
-        if ([[parent rootViewController] isKindOfClass:NSClassFromString(@"UINavigationController")])
-        {
-            UINavigationController *navigationController = (UINavigationController *)parent.rootViewController;
-            if (!navigationController.navigationBarHidden)
-            {
-                // Position under the navigation controller's navigation bar.
-                verticalOffset += navigationController.navigationBar.frame.size.height;
-            }
-            
-            // Display the view under the navigation controller's navigation bar so the animation's appear
-            // below the navigation bar and the panel can persist accross views.
-            [self removeFromSuperview];
-            [[navigationController view] insertSubview:self
-                                          belowSubview:navigationController.navigationBar];
         }
     }
     
