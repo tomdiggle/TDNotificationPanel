@@ -35,6 +35,15 @@
     #define TDLineBreakByWordWrapping UILineBreakModeWordWrap
 #endif
 
+// Support dynamic type
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+    #define TDTitleFont [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    #define TDSubtitleFont [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+#else
+    #define TDTitleFont [UIFont boldSystemFontOfSize:kTitleFontSize];
+    #define TDSubtitleFont [UIFont systemFontOfSize:kSubtitleFontSize];
+#endif
+
 // Text size methods borrowed of MBProgressHUD by Jonathan George
 // https://github.com/jdg/MBProgressHUD
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
@@ -151,10 +160,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
     if (!(self = [super initWithFrame:[view bounds]])) return nil;
     
     _titleText = title;
-    _titleFont = [UIFont boldSystemFontOfSize:kTitleFontSize];
+    _titleFont = TDTitleFont;
     
     _subtitleText = subtitle;
-    _subtitleFont = [UIFont systemFontOfSize:kSubtitleFontSize];
+    _subtitleFont = TDSubtitleFont;
     
     _notificationType = (mode == TDNotificationModeText) ? type : TDNotificationTypeMessage;
     _notificationMode = mode;
@@ -172,6 +181,11 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [self registerForKVO];
     [self positionElements];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(fontSizeChanged:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+    
     return self;
 }
 
@@ -179,6 +193,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self unregisterFromKVO];
 }
 
@@ -382,7 +397,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     if (_titleText)
     {
         CGRect title = { .origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding, .origin.y = kYPadding };
-        CGSize titleSize = MB_TEXTSIZE(self.titleText, self.titleFont);
+        CGSize titleSize = MB_TEXTSIZE(self.title.text, self.title.font);
         titleSize.width = MIN(titleSize.width, size.width - title.origin.x - kXPadding);
         title.size = titleSize;
         _title.frame = title;
@@ -414,7 +429,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
         subtitle.origin.x = CGRectGetMinX(_icon.frame) + CGRectGetWidth(_icon.frame) + kXPadding;
         subtitle.origin.y = (_notificationMode == TDNotificationModeProgressBar) ? CGRectGetMaxY([_progressBar frame]) + kSpacing : CGRectGetMaxY(_title.frame) + kSpacing;
         CGSize subtitleMaxSize = { .width = size.width - subtitle.origin.x - kXPadding, .height = CGRectGetHeight(self.bounds) };
-        subtitle.size = MB_MULTILINE_TEXTSIZE(self.subtitleText, self.subtitleFont, subtitleMaxSize, [self.subtitle lineBreakMode]);
+        subtitle.size = MB_MULTILINE_TEXTSIZE(self.subtitle.text, self.subtitle.font, subtitleMaxSize, [self.subtitle lineBreakMode]);
         _subtitle.frame = subtitle;
         
         size.height += CGRectGetHeight(_subtitle.frame);
@@ -467,6 +482,19 @@ static const CGFloat kSubtitleFontSize = 12.f;
     
     CGGradientRelease(backgroundGradient);
     CGColorSpaceRelease(colorSpace);
+}
+
+#pragma mark - UIContentSizeCategoryDidChangeNotification
+
+- (void)fontSizeChanged:(NSNotification *)notification
+{
+    self.titleFont = TDTitleFont;
+    self.title.font = TDTitleFont;
+    self.subtitleFont = TDSubtitleFont;
+    self.subtitle.font = TDSubtitleFont;
+    
+    [self positionElements];
+    self.frame = CGRectMake(0, 0, _totalSize.width, _totalSize.height);
 }
 
 @end
