@@ -157,7 +157,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (instancetype)initWithView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible
 {
-    if (!(self = [super initWithFrame:[view bounds]])) return nil;
+    if (!(self = [super initWithFrame:[view bounds]]))
+    {
+        return nil;
+    }
     
     _titleText = title;
     _titleFont = TDTitleFont;
@@ -396,7 +399,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (!_dismissible) return;
+    if (!_dismissible)
+    {
+        return;
+    }
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     
