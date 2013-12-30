@@ -81,6 +81,11 @@ typedef enum {
 @property (nonatomic, copy) UIFont *subtitleFont;
 
 /**
+ * The duration of the notification. Default is 0.
+ */
+@property (nonatomic, assign) NSTimeInterval notificationDuration;
+
+/**
  * The progress of the progress bar, from 0.0 to 1.0. Defaults to 0.0.
  *
  * @see notificationMode
@@ -172,12 +177,5 @@ typedef enum {
  * Hides the notification.
  */
 - (void)hide;
-
-/**
- * Hides the notification after a delay.
- *
- * @param delay Delay in seconds until the notification if hidden.
- */
-- (void)hideAfterDelay:(NSTimeInterval)delay;
 
 @end

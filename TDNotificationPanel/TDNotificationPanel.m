@@ -77,12 +77,26 @@ static const CGFloat kSubtitleFontSize = 12.f;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic, strong) UIProgressView *progressBar;
 @property (nonatomic, assign) CGSize totalSize;
+@property (nonatomic, copy) NSMutableArray *notificationQueue;
 
 @end
 
 @implementation TDNotificationPanel
 
 #pragma mark - Class Methods
+
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible
+{
+    TDNotificationPanel *panel =  [TDNotificationPanel showNotificationInView:view
+                                                                        title:title
+                                                                     subtitle:subtitle
+                                                                         type:type
+                                                                         mode:mode
+                                                                  dismissible:dismissible
+                                                               hideAfterDelay:0];
+    
+    return panel;
+}
 
 + (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay
 {
@@ -92,21 +106,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
                                                                       type:type
                                                                       mode:mode
                                                                dismissible:dismissible];
-    [view addSubview:panel];
-    [panel show];
-    [panel hideAfterDelay:delay];
-    
-    return panel;
-}
-
-+ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible
-{
-    TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view
-                                                                     title:title
-                                                                  subtitle:subtitle
-                                                                      type:type
-                                                                      mode:mode
-                                                               dismissible:dismissible];
+    panel.notificationDuration = delay;
     [view addSubview:panel];
     [panel show];
     
@@ -167,6 +167,8 @@ static const CGFloat kSubtitleFontSize = 12.f;
     
     _notificationType = (mode == TDNotificationModeText) ? type : TDNotificationTypeMessage;
     _notificationMode = mode;
+    
+    _notificationDuration = 0;
     
     _dismissible = dismissible;
     
@@ -265,18 +267,31 @@ static const CGFloat kSubtitleFontSize = 12.f;
     _backgroundColors = @[(id)backgroundColor.CGColor, (id)bottomBorder.CGColor];
 }
 
+#pragma mark - Notification Queue
+
+- (NSMutableArray *)notificationQueue
+{
+    static NSMutableArray *notificationQueue = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        notificationQueue = [[NSMutableArray alloc] init];
+    });
+    
+    return notificationQueue;
+}
+
 #pragma mark - Show & Hide
 
 - (void)show
 {
-    NSArray *subviews = [[self superview] subviews];
-    for (id view in [subviews reverseObjectEnumerator])
+    if (![self.notificationQueue containsObject:self])
     {
-        if ([view isKindOfClass:NSClassFromString(@"TDNotificationPanel")] && ![view isEqual:self])
-        {
-            // If a notification panel is already displaying hide it before showing the new one.
-            [view hide];
-        }
+        [self.notificationQueue addObject:self];
+    }
+    
+    if (![[self.notificationQueue firstObject] isEqual:self])
+    {
+        return;
     }
     
     self.frame = CGRectMake(0, -_totalSize.height, _totalSize.width, _totalSize.height);
@@ -300,6 +315,11 @@ static const CGFloat kSubtitleFontSize = 12.f;
         [self setCenter:CGPointMake(self.center.x, verticalOffset + self.bounds.size.height - self.frame.size.height / 2)];
         [self setAlpha:1.0];
     }];
+    
+    if (self.notificationDuration > 0)
+    {
+        [self performSelector:@selector(hide) withObject:nil afterDelay:self.notificationDuration];
+    }
 }
 
 - (void)hide
@@ -308,13 +328,16 @@ static const CGFloat kSubtitleFontSize = 12.f;
         [self setCenter:CGPointMake(self.center.x, -self.frame.size.height / 2)];
         [self setAlpha:0];
     } completion:^(BOOL finished) {
+        [self.notificationQueue removeObject:self];
+        
+        if ([[self.notificationQueue firstObject] isKindOfClass:NSClassFromString(@"TDNotificationPanel")])
+        {
+            TDNotificationPanel *notification = (TDNotificationPanel *)[self.notificationQueue firstObject];
+            [notification show];
+        }
+        
         [self removeFromSuperview];
     }];
-}
-
-- (void)hideAfterDelay:(NSTimeInterval)delay
-{
-    [self performSelector:@selector(hide) withObject:nil afterDelay:delay];
 }
 
 #pragma mark - KVO
