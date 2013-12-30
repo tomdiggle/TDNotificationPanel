@@ -98,6 +98,23 @@ typedef enum {
 @property (nonatomic, assign, getter = isDismissible) BOOL dismissible;
 
 /**
+ * Initializes a new notification, adds it to the provided view then displays it.
+ *
+ * @param view The view that the notification will be added to.
+ * @param title The title that will be displayed.
+ * @param subtitle The subtitle that will be displayed under the title.
+ * @param type The notification type.
+ * @param mode The notification mode.
+ * @param dismissible The notification is dismissible by tapping.
+ *
+ * @return A reference to the created notification.
+ *
+ * @see TDNotificationType
+ * @see TDNotificationMode
+ */
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible;
+
+/**
  * Initializes a new notification, adds it to the provided view, shows it and then removes it after the delay given.
  *
  * @param view The view that the notification will be added to.
@@ -114,23 +131,6 @@ typedef enum {
  * @see TDNotificationMode
  */
 + (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay;
-
-/**
- * Initializes a new notification, adds it to the provided view then displays it.
- *
- * @param view The view that the notification will be added to.
- * @param title The title that will be displayed.
- * @param subtitle The subtitle that will be displayed under the title.
- * @param type The notification type.
- * @param mode The notification mode.
- * @param dismissible The notification is dismissible by tapping.
- *
- * @return A reference to the created notification.
- *
- * @see TDNotificationType
- * @see TDNotificationMode
- */
-+ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible;
 
 /**
  * Hides the top-most notification in the view provided.
