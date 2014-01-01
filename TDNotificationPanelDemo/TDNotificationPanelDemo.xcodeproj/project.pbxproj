@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		323325A8187479C60025107F /* infoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 323325A6187479C60025107F /* infoIcon.png */; };
+		323325A9187479C60025107F /* infoIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 323325A7187479C60025107F /* infoIcon@2x.png */; };
 		3297C7FC178AE284001C8605 /* errorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FA178AE284001C8605 /* errorIcon.png */; };
 		3297C7FD178AE284001C8605 /* errorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FB178AE284001C8605 /* errorIcon@2x.png */; };
 		3297C800178B1465001C8605 /* successIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FE178B1465001C8605 /* successIcon.png */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		323325A6187479C60025107F /* infoIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = infoIcon.png; sourceTree = "<group>"; };
+		323325A7187479C60025107F /* infoIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infoIcon@2x.png"; sourceTree = "<group>"; };
 		3297C7FA178AE284001C8605 /* errorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorIcon.png; sourceTree = "<group>"; };
 		3297C7FB178AE284001C8605 /* errorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errorIcon@2x.png"; sourceTree = "<group>"; };
 		3297C7FE178B1465001C8605 /* successIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = successIcon.png; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 			children = (
 				3297C7FA178AE284001C8605 /* errorIcon.png */,
 				3297C7FB178AE284001C8605 /* errorIcon@2x.png */,
+				323325A6187479C60025107F /* infoIcon.png */,
+				323325A7187479C60025107F /* infoIcon@2x.png */,
 				3297C7FE178B1465001C8605 /* successIcon.png */,
 				3297C7FF178B1465001C8605 /* successIcon@2x.png */,
 			);
@@ -195,6 +201,7 @@
 			files = (
 				32EA278916D1346400BB528E /* InfoPlist.strings in Resources */,
 				32EA279116D1346400BB528E /* Default.png in Resources */,
+				323325A8187479C60025107F /* infoIcon.png in Resources */,
 				32EA279316D1346400BB528E /* Default@2x.png in Resources */,
 				32EA279516D1346400BB528E /* Default-568h@2x.png in Resources */,
 				32EA279816D1346400BB528E /* MainStoryboard.storyboard in Resources */,
@@ -202,6 +209,7 @@
 				3297C7FD178AE284001C8605 /* errorIcon@2x.png in Resources */,
 				3297C800178B1465001C8605 /* successIcon.png in Resources */,
 				3297C801178B1465001C8605 /* successIcon@2x.png in Resources */,
+				323325A9187479C60025107F /* infoIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
