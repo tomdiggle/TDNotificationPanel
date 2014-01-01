@@ -259,7 +259,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     {
         backgroundColor = [UIColor colorWithRed:0 green:0.478 blue:1 alpha:0.900];
         bottomBorder = [UIColor colorWithRed:0.121 green:0.294 blue:0.898 alpha:1];
-        [_icon setImage:nil];
+        [_icon setImage:[UIImage imageNamed:@"infoIcon"]];
     }
     else if (_notificationType == TDNotificationTypeSuccess)
     {
