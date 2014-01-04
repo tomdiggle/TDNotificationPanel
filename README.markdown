@@ -74,9 +74,6 @@ TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:self.view
 
 ```
 
-## Credits
-The icons used are from the [ikonic](http://radesign.in/ikonic-150-vector-icons-25-free/) icon set.
-
 ## License
 
 TDNotificationPanel is distributed under the [The MIT License](https://github.com/tomdiggle/tdnotificationpanel/blob/master/LICENSE).
