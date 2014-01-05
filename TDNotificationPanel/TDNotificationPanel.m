@@ -238,6 +238,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
     {
         _progressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         [_progressBar setFrame:CGRectZero];
+        [_progressBar setProgressTintColor:[UIColor whiteColor]];
         [self addSubview:_progressBar];
     }
     else if (_notificationMode == TDNotificationModeText)
