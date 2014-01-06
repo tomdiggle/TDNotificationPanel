@@ -77,7 +77,6 @@ static const CGFloat kSubtitleFontSize = 12.f;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic, strong) UIProgressView *progressBar;
 @property (nonatomic, assign) CGSize totalSize;
-@property (nonatomic, copy) NSMutableArray *notificationQueue;
 
 @end
 
