@@ -86,6 +86,11 @@ typedef enum {
 @property (nonatomic, assign) NSTimeInterval notificationDuration;
 
 /**
+ * The completion handler to call when the notification is dismissed.
+ */
+@property (nonatomic, copy) void(^completionHandler)();
+
+/**
  * The progress of the progress bar, from 0.0 to 1.0. Defaults to 0.0.
  *
  * @see notificationMode
@@ -115,6 +120,24 @@ typedef enum {
 + (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible;
 
 /**
+ * Initializes a new notification, adds it to the provided view then displays it, then calls a handler upon completion.
+ *
+ * @param view The view that the notification will be added to.
+ * @param title The title that will be displayed.
+ * @param subtitle The subtitle that will be displayed under the title.
+ * @param type The notification type.
+ * @param mode The notification mode.
+ * @param dismissible The notification is dismissible by tapping.
+ * @param completionHandler The completion handler to call when the notification is dismissed.
+ *
+ * @return A reference to the created notification.
+ *
+ * @see TDNotificationType
+ * @see TDNotificationMode
+ */
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible completionHandler:(void (^)())completionHandler;
+
+/**
  * Initializes a new notification, adds it to the provided view, shows it and then removes it after the delay given.
  *
  * @param view The view that the notification will be added to.
@@ -131,6 +154,25 @@ typedef enum {
  * @see TDNotificationMode
  */
 + (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay;
+
+/**
+ * Initializes a new notification, adds it to the provided view, shows it, removes it after the delay given, then calls a handler upon completion.
+ *
+ * @param view The view that the notification will be added to.
+ * @param title The title that will be displayed.
+ * @param subtitle The subtitle that will be displayed under the title.
+ * @param type The notification type.
+ * @param mode The notification mode.
+ * @param dismissible The notification is dismissible by tapping.
+ * @param delay The delay in seconds before the notification will be removed.
+ * @param completionHandler The completion handler to call when the notification is dismissed.
+ *
+ * @return A reference to the created notification.
+ *
+ * @see TDNotificationType
+ * @see TDNotificationMode
+ */
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay completionHandler:(void (^)())completionHandler;
 
 /**
  * Hides the top-most notification in the view provided.

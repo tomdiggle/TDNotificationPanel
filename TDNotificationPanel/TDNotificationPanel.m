@@ -92,12 +92,41 @@ static const CGFloat kSubtitleFontSize = 12.f;
                                                                          type:type
                                                                          mode:mode
                                                                   dismissible:dismissible
-                                                               hideAfterDelay:0];
+                                                               hideAfterDelay:0
+                                                            completionHandler:nil];
+    
+    return panel;
+}
+
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible completionHandler:(void (^)())completionHandler
+{
+    TDNotificationPanel *panel =  [TDNotificationPanel showNotificationInView:view
+                                                                        title:title
+                                                                     subtitle:subtitle
+                                                                         type:type
+                                                                         mode:mode
+                                                                  dismissible:dismissible
+                                                               hideAfterDelay:0
+                                                            completionHandler:completionHandler];
     
     return panel;
 }
 
 + (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay
+{
+    TDNotificationPanel *panel =  [TDNotificationPanel showNotificationInView:view
+                                                                        title:title
+                                                                     subtitle:subtitle
+                                                                         type:type
+                                                                         mode:mode
+                                                                  dismissible:dismissible
+                                                               hideAfterDelay:delay
+                                                            completionHandler:nil];
+    
+    return panel;
+}
+
++ (instancetype)showNotificationInView:(UIView *)view title:(NSString *)title subtitle:(NSString *)subtitle type:(TDNotificationType)type mode:(TDNotificationMode)mode dismissible:(BOOL)dismissible hideAfterDelay:(NSTimeInterval)delay completionHandler:(void (^)())completionHandler;
 {
     TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:view
                                                                      title:title
@@ -106,6 +135,7 @@ static const CGFloat kSubtitleFontSize = 12.f;
                                                                       mode:mode
                                                                dismissible:dismissible];
     panel.notificationDuration = delay;
+    panel.completionHandler = completionHandler;
     [view addSubview:panel];
     [panel show];
     
@@ -337,6 +367,11 @@ static const CGFloat kSubtitleFontSize = 12.f;
         {
             TDNotificationPanel *notification = (TDNotificationPanel *)[self.notificationQueue firstObject];
             [notification show];
+        }
+        
+        if (self.completionHandler)
+        {
+            self.completionHandler();
         }
         
         [self removeFromSuperview];
