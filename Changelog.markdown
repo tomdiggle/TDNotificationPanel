@@ -1,3 +1,23 @@
+### Version 0.5
+
+*Released on 07.01.2014*
+
+Add a completion handler to call when the notification is dismissed.
+
+Add icon to message notification type
+
+Add all notifications are now put into a queue and presetented one after another
+
+Change title and subtitle labels now use dynamic type if available
+
+Change progress color of progress bar to white in iOS 7+
+
+Change when displaying a notification in a UIWindow the notification will be displayed above the UINavigationBar
+
+Change design of error and success icons
+
+Remove graident color in background of all notification types
+
 ### Version 0.4.3
 
 *Released on 16.09.2013*

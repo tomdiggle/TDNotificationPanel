@@ -19,7 +19,7 @@ TDNotificationPanel has been tested on iOS 6+ and requires ARC. It depends on th
 ### CocoaPods
 [CocoaPods](http://cocoapods.org/) is the recommended way to add TDNotificationPanel to your project.
 
-1. Add a pod entry for TDNotificationPanel to your Podfile `pod 'TDNotificationPanel', '~> 0.4.3'`.
+1. Add a pod entry for TDNotificationPanel to your Podfile `pod 'TDNotificationPanel', '~> 0.5'`.
 2. Install the pod(s) by running pod install.
 3. Include TDNotificationPanel wherever you need it with `#import "TDNotificationPanel.h"`.
 
@@ -72,6 +72,43 @@ TDNotificationPanel *panel = [[TDNotificationPanel alloc] initWithView:self.view
 	[panel hideAfterDelay:3];
 }];
 
+```
+
+## Completion Handler
+A completion handler can be set and will be called when the notification is dismissed.
+
+```
+[TDNotificationPanel showNotificationInView:self.view
+                                      title:@"Notification Title"
+                                   subtitle:@"Notification Subtitle"
+                                       type:TDNotificationTypeError
+                                       mode:TDNotificationModeText
+                                dismissible:YES
+                             hideAfterDelay:3
+                          completionHandler:^{
+                                     NSLog(@"Completion Handler");
+                          ];
+```
+
+## Queue
+All notifications are added to a queue and displayed sequentially.
+
+```
+[TDNotificationPanel showNotificationInView:self.view
+                                      title:@"Notification 1"
+                                   subtitle:@"Notification 1 Subtitle"
+                                       type:TDNotificationTypeError
+                                       mode:TDNotificationModeText
+                                dismissible:YES
+                             hideAfterDelay:3];
+                             
+[TDNotificationPanel showNotificationInView:self.view
+                                      title:@"Notification 2 Title"
+                                   subtitle:@"Notification 2 Subtitle"
+                                       type:TDNotificationTypeSuccess
+                                       mode:TDNotificationModeText
+                                dismissible:YES
+                             hideAfterDelay:3];
 ```
 
 ## License
