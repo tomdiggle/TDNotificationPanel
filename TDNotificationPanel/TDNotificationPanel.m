@@ -27,6 +27,8 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 
+#define __IPHONE_OS_7_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000
     #define TDTextAlignmentLeft NSTextAlignmentLeft
     #define TDLineBreakByWordWrapping NSLineBreakByWordWrapping
@@ -267,7 +269,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
     {
         _progressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
         [_progressBar setFrame:CGRectZero];
-        [_progressBar setProgressTintColor:[UIColor whiteColor]];
+        if (__IPHONE_OS_7_OR_LATER)
+        {
+            [_progressBar setProgressTintColor:[UIColor whiteColor]];
+        }
         [self addSubview:_progressBar];
     }
     else if (_notificationMode == TDNotificationModeText)
