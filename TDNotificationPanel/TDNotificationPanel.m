@@ -217,10 +217,12 @@ static const CGFloat kSubtitleFontSize = 12.f;
     [self registerForKVO];
     [self positionElements];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(fontSizeChanged:)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
+    if (__IPHONE_OS_7_OR_LATER) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                selector:@selector(fontSizeChanged:)
+                                                    name:UIContentSizeCategoryDidChangeNotification
+                                                object:nil];
+    }
     
     return self;
 }
@@ -229,7 +231,10 @@ static const CGFloat kSubtitleFontSize = 12.f;
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (__IPHONE_OS_7_OR_LATER) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+
     [self unregisterFromKVO];
 }
 
