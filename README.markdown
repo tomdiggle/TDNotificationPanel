@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/tomdiggle/TDNotificationPanel.svg?branch=master)](https://travis-ci.org/tomdiggle/TDNotificationPanel)
+
 # TDNotificationPanel
 TDNotificationPanel is a drop in class that displays a notification which can contain a title, subtitle, icon, progress bar or activity indicator.
 
