@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		325636441906DC1900B60145 /* XCTestCase+AsyncTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 325636431906DC1900B60145 /* XCTestCase+AsyncTesting.m */; };
 		32C535431906A56C0093601C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C535421906A56C0093601C /* Foundation.framework */; };
 		32C535481906A56C0093601C /* TDNotificationPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 32C535471906A56C0093601C /* TDNotificationPanel.h */; };
 		32C5354A1906A56C0093601C /* TDNotificationPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C535491906A56C0093601C /* TDNotificationPanel.m */; };
@@ -44,8 +43,6 @@
 
 /* Begin PBXFileReference section */
 		325636401906A75A00B60145 /* TDNotificationPanel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TDNotificationPanel-Prefix.pch"; sourceTree = SOURCE_ROOT; };
-		325636421906DC1900B60145 /* XCTestCase+AsyncTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+AsyncTesting.h"; sourceTree = "<group>"; };
-		325636431906DC1900B60145 /* XCTestCase+AsyncTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase+AsyncTesting.m"; sourceTree = "<group>"; };
 		32C5353F1906A56C0093601C /* libTDNotificationPanel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTDNotificationPanel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		32C535421906A56C0093601C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32C535471906A56C0093601C /* TDNotificationPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDNotificationPanel.h; sourceTree = "<group>"; };
@@ -81,15 +78,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		325636411906DC1900B60145 /* XCTestCase+AsyncTesting */ = {
-			isa = PBXGroup;
-			children = (
-				325636421906DC1900B60145 /* XCTestCase+AsyncTesting.h */,
-				325636431906DC1900B60145 /* XCTestCase+AsyncTesting.m */,
-			);
-			path = "XCTestCase+AsyncTesting";
-			sourceTree = "<group>";
-		};
 		32C535361906A56C0093601C = {
 			isa = PBXGroup;
 			children = (
@@ -140,7 +128,6 @@
 		32C535581906A56C0093601C /* TDNotificationPanelTests */ = {
 			isa = PBXGroup;
 			children = (
-				325636411906DC1900B60145 /* XCTestCase+AsyncTesting */,
 				32C5355E1906A56C0093601C /* TDNotificationPanelTests.m */,
 				32C535591906A56C0093601C /* Supporting Files */,
 			);
@@ -245,7 +232,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				325636441906DC1900B60145 /* XCTestCase+AsyncTesting.m in Sources */,
 				32C5355F1906A56C0093601C /* TDNotificationPanelTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
