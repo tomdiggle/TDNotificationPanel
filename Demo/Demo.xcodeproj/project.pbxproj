@@ -9,49 +9,47 @@
 /* Begin PBXBuildFile section */
 		323325A8187479C60025107F /* infoIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 323325A6187479C60025107F /* infoIcon.png */; };
 		323325A9187479C60025107F /* infoIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 323325A7187479C60025107F /* infoIcon@2x.png */; };
+		3233B86F1908527D00151679 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3233B86A1908527D00151679 /* Default-568h@2x.png */; };
+		3233B8701908527D00151679 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3233B86B1908527D00151679 /* Default.png */; };
+		3233B8711908527D00151679 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3233B86C1908527D00151679 /* Default@2x.png */; };
+		3233B8751908529800151679 /* TDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3233B8741908529800151679 /* TDViewController.m */; };
+		323EB34219085519007FD078 /* TDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 323EB34119085519007FD078 /* TDAppDelegate.m */; };
+		323EB3451908553A007FD078 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323EB3431908553A007FD078 /* MainStoryboard.storyboard */; };
 		3297C7FC178AE284001C8605 /* errorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FA178AE284001C8605 /* errorIcon.png */; };
 		3297C7FD178AE284001C8605 /* errorIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FB178AE284001C8605 /* errorIcon@2x.png */; };
 		3297C800178B1465001C8605 /* successIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FE178B1465001C8605 /* successIcon.png */; };
 		3297C801178B1465001C8605 /* successIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C7FF178B1465001C8605 /* successIcon@2x.png */; };
 		32EA277F16D1346400BB528E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EA277E16D1346400BB528E /* UIKit.framework */; };
 		32EA278116D1346400BB528E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EA278016D1346400BB528E /* Foundation.framework */; };
-		32EA278916D1346400BB528E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32EA278716D1346400BB528E /* InfoPlist.strings */; };
-		32EA278B16D1346400BB528E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EA278A16D1346400BB528E /* main.m */; };
-		32EA278F16D1346400BB528E /* TDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EA278E16D1346400BB528E /* TDAppDelegate.m */; };
-		32EA279116D1346400BB528E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EA279016D1346400BB528E /* Default.png */; };
-		32EA279316D1346400BB528E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EA279216D1346400BB528E /* Default@2x.png */; };
-		32EA279516D1346400BB528E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EA279416D1346400BB528E /* Default-568h@2x.png */; };
-		32EA279816D1346400BB528E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32EA279616D1346400BB528E /* MainStoryboard.storyboard */; };
-		32EA279B16D1346400BB528E /* TDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EA279A16D1346400BB528E /* TDViewController.m */; };
 		32EA27A816D1359900BB528E /* TDNotificationPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EA27A516D1359900BB528E /* TDNotificationPanel.m */; };
 		32EA27AB16D2B1BF00BB528E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32EA278216D1346400BB528E /* CoreGraphics.framework */; };
+		32FF700B190854AC00E0B940 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FF700A190854AC00E0B940 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		323325A6187479C60025107F /* infoIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = infoIcon.png; sourceTree = "<group>"; };
 		323325A7187479C60025107F /* infoIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infoIcon@2x.png"; sourceTree = "<group>"; };
+		3233B86A1908527D00151679 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Demo/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
+		3233B86B1908527D00151679 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Demo/Default.png; sourceTree = SOURCE_ROOT; };
+		3233B86C1908527D00151679 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Demo/Default@2x.png"; sourceTree = SOURCE_ROOT; };
+		3233B86D1908527D00151679 /* Demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Demo-Info.plist"; path = "Demo/Demo-Info.plist"; sourceTree = SOURCE_ROOT; };
+		3233B86E1908527D00151679 /* Demo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Demo-Prefix.pch"; path = "Demo/Demo-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		3233B8731908529800151679 /* TDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDViewController.h; path = Demo/TDViewController.h; sourceTree = SOURCE_ROOT; };
+		3233B8741908529800151679 /* TDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDViewController.m; path = Demo/TDViewController.m; sourceTree = SOURCE_ROOT; };
+		3233B8761908529E00151679 /* TDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TDAppDelegate.h; path = Demo/TDAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		323EB34119085519007FD078 /* TDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDAppDelegate.m; path = Demo/TDAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		323EB3441908553A007FD078 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = Demo/en.lproj/MainStoryboard.storyboard; sourceTree = SOURCE_ROOT; };
 		3297C7FA178AE284001C8605 /* errorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = errorIcon.png; sourceTree = "<group>"; };
 		3297C7FB178AE284001C8605 /* errorIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "errorIcon@2x.png"; sourceTree = "<group>"; };
 		3297C7FE178B1465001C8605 /* successIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = successIcon.png; sourceTree = "<group>"; };
 		3297C7FF178B1465001C8605 /* successIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "successIcon@2x.png"; sourceTree = "<group>"; };
-		32EA277B16D1346400BB528E /* TDNotificationPanelDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDNotificationPanelDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		32EA277B16D1346400BB528E /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32EA277E16D1346400BB528E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		32EA278016D1346400BB528E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32EA278216D1346400BB528E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		32EA278616D1346400BB528E /* TDNotificationPanelDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TDNotificationPanelDemo-Info.plist"; sourceTree = "<group>"; };
-		32EA278816D1346400BB528E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		32EA278A16D1346400BB528E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32EA278C16D1346400BB528E /* TDNotificationPanelDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TDNotificationPanelDemo-Prefix.pch"; sourceTree = "<group>"; };
-		32EA278D16D1346400BB528E /* TDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDAppDelegate.h; sourceTree = "<group>"; };
-		32EA278E16D1346400BB528E /* TDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDAppDelegate.m; sourceTree = "<group>"; };
-		32EA279016D1346400BB528E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		32EA279216D1346400BB528E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		32EA279416D1346400BB528E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		32EA279716D1346400BB528E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		32EA279916D1346400BB528E /* TDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDViewController.h; sourceTree = "<group>"; };
-		32EA279A16D1346400BB528E /* TDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDViewController.m; sourceTree = "<group>"; };
 		32EA27A416D1359900BB528E /* TDNotificationPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDNotificationPanel.h; sourceTree = "<group>"; };
 		32EA27A516D1359900BB528E /* TDNotificationPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDNotificationPanel.m; sourceTree = "<group>"; };
+		32FF700A190854AC00E0B940 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Demo/main.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				32EA27A116D1359900BB528E /* TDNotificationPanel */,
-				32EA278416D1346400BB528E /* TDNotificationPanelDemo */,
+				32EA278416D1346400BB528E /* Demo */,
 				32EA277D16D1346400BB528E /* Frameworks */,
 				32EA277C16D1346400BB528E /* Products */,
 			);
@@ -94,7 +92,7 @@
 		32EA277C16D1346400BB528E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				32EA277B16D1346400BB528E /* TDNotificationPanelDemo.app */,
+				32EA277B16D1346400BB528E /* Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,29 +107,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		32EA278416D1346400BB528E /* TDNotificationPanelDemo */ = {
+		32EA278416D1346400BB528E /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				32EA278D16D1346400BB528E /* TDAppDelegate.h */,
-				32EA278E16D1346400BB528E /* TDAppDelegate.m */,
-				32EA279616D1346400BB528E /* MainStoryboard.storyboard */,
-				32EA279916D1346400BB528E /* TDViewController.h */,
-				32EA279A16D1346400BB528E /* TDViewController.m */,
+				3233B8761908529E00151679 /* TDAppDelegate.h */,
+				323EB34119085519007FD078 /* TDAppDelegate.m */,
+				3233B8731908529800151679 /* TDViewController.h */,
+				3233B8741908529800151679 /* TDViewController.m */,
 				32EA278516D1346400BB528E /* Supporting Files */,
 			);
+			name = Demo;
 			path = TDNotificationPanelDemo;
 			sourceTree = "<group>";
 		};
 		32EA278516D1346400BB528E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				32EA278616D1346400BB528E /* TDNotificationPanelDemo-Info.plist */,
-				32EA278716D1346400BB528E /* InfoPlist.strings */,
-				32EA278A16D1346400BB528E /* main.m */,
-				32EA278C16D1346400BB528E /* TDNotificationPanelDemo-Prefix.pch */,
-				32EA279016D1346400BB528E /* Default.png */,
-				32EA279216D1346400BB528E /* Default@2x.png */,
-				32EA279416D1346400BB528E /* Default-568h@2x.png */,
+				323EB3431908553A007FD078 /* MainStoryboard.storyboard */,
+				32FF700A190854AC00E0B940 /* main.m */,
+				3233B86A1908527D00151679 /* Default-568h@2x.png */,
+				3233B86B1908527D00151679 /* Default.png */,
+				3233B86C1908527D00151679 /* Default@2x.png */,
+				3233B86D1908527D00151679 /* Demo-Info.plist */,
+				3233B86E1908527D00151679 /* Demo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -150,9 +148,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		32EA277A16D1346400BB528E /* TDNotificationPanelDemo */ = {
+		32EA277A16D1346400BB528E /* Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 32EA279E16D1346400BB528E /* Build configuration list for PBXNativeTarget "TDNotificationPanelDemo" */;
+			buildConfigurationList = 32EA279E16D1346400BB528E /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
 				32EA277716D1346400BB528E /* Sources */,
 				32EA277816D1346400BB528E /* Frameworks */,
@@ -162,9 +160,9 @@
 			);
 			dependencies = (
 			);
-			name = TDNotificationPanelDemo;
+			name = Demo;
 			productName = TDNotificationPanelDemo;
-			productReference = 32EA277B16D1346400BB528E /* TDNotificationPanelDemo.app */;
+			productReference = 32EA277B16D1346400BB528E /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -177,7 +175,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Tom Diggle";
 			};
-			buildConfigurationList = 32EA277616D1346400BB528E /* Build configuration list for PBXProject "TDNotificationPanelDemo" */;
+			buildConfigurationList = 32EA277616D1346400BB528E /* Build configuration list for PBXProject "Demo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -189,7 +187,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				32EA277A16D1346400BB528E /* TDNotificationPanelDemo */,
+				32EA277A16D1346400BB528E /* Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -199,16 +197,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32EA278916D1346400BB528E /* InfoPlist.strings in Resources */,
-				32EA279116D1346400BB528E /* Default.png in Resources */,
 				323325A8187479C60025107F /* infoIcon.png in Resources */,
-				32EA279316D1346400BB528E /* Default@2x.png in Resources */,
-				32EA279516D1346400BB528E /* Default-568h@2x.png in Resources */,
-				32EA279816D1346400BB528E /* MainStoryboard.storyboard in Resources */,
+				3233B86F1908527D00151679 /* Default-568h@2x.png in Resources */,
+				3233B8701908527D00151679 /* Default.png in Resources */,
 				3297C7FC178AE284001C8605 /* errorIcon.png in Resources */,
 				3297C7FD178AE284001C8605 /* errorIcon@2x.png in Resources */,
 				3297C800178B1465001C8605 /* successIcon.png in Resources */,
+				323EB3451908553A007FD078 /* MainStoryboard.storyboard in Resources */,
 				3297C801178B1465001C8605 /* successIcon@2x.png in Resources */,
+				3233B8711908527D00151679 /* Default@2x.png in Resources */,
 				323325A9187479C60025107F /* infoIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,9 +217,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32EA278B16D1346400BB528E /* main.m in Sources */,
-				32EA278F16D1346400BB528E /* TDAppDelegate.m in Sources */,
-				32EA279B16D1346400BB528E /* TDViewController.m in Sources */,
+				3233B8751908529800151679 /* TDViewController.m in Sources */,
+				32FF700B190854AC00E0B940 /* main.m in Sources */,
+				323EB34219085519007FD078 /* TDAppDelegate.m in Sources */,
 				32EA27A816D1359900BB528E /* TDNotificationPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,18 +227,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		32EA278716D1346400BB528E /* InfoPlist.strings */ = {
+		323EB3431908553A007FD078 /* MainStoryboard.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				32EA278816D1346400BB528E /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		32EA279616D1346400BB528E /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				32EA279716D1346400BB528E /* en */,
+				323EB3441908553A007FD078 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -309,10 +298,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TDNotificationPanelDemo/TDNotificationPanelDemo-Prefix.pch";
-				INFOPLIST_FILE = "TDNotificationPanelDemo/TDNotificationPanelDemo-Info.plist";
+				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
+				INFOPLIST_FILE = "Demo/Demo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Demo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -321,10 +310,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TDNotificationPanelDemo/TDNotificationPanelDemo-Prefix.pch";
-				INFOPLIST_FILE = "TDNotificationPanelDemo/TDNotificationPanelDemo-Info.plist";
+				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
+				INFOPLIST_FILE = "Demo/Demo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Demo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -332,7 +321,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		32EA277616D1346400BB528E /* Build configuration list for PBXProject "TDNotificationPanelDemo" */ = {
+		32EA277616D1346400BB528E /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				32EA279C16D1346400BB528E /* Debug */,
@@ -341,7 +330,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		32EA279E16D1346400BB528E /* Build configuration list for PBXNativeTarget "TDNotificationPanelDemo" */ = {
+		32EA279E16D1346400BB528E /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				32EA279F16D1346400BB528E /* Debug */,
