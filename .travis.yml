@@ -1,1 +1,3 @@
 language: objective-c
+xcode_workspace: TDNotificationPanel.xcworkspace
+xcode_scheme: TDNotificationPanelTests
