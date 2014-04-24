@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32890C5E19099F63003E5971 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32890C5D19099F63003E5971 /* UIKit.framework */; };
+		32890C6019099F8B003E5971 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32890C5F19099F8B003E5971 /* CoreGraphics.framework */; };
 		32C535431906A56C0093601C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C535421906A56C0093601C /* Foundation.framework */; };
 		32C535481906A56C0093601C /* TDNotificationPanel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 32C535471906A56C0093601C /* TDNotificationPanel.h */; };
 		32C5354A1906A56C0093601C /* TDNotificationPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C535491906A56C0093601C /* TDNotificationPanel.m */; };
 		32C535511906A56C0093601C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C535501906A56C0093601C /* XCTest.framework */; };
 		32C535521906A56C0093601C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C535421906A56C0093601C /* Foundation.framework */; };
-		32C535541906A56C0093601C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C535531906A56C0093601C /* UIKit.framework */; };
 		32C535571906A56C0093601C /* libTDNotificationPanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C5353F1906A56C0093601C /* libTDNotificationPanel.a */; };
 		32C5355D1906A56C0093601C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 32C5355B1906A56C0093601C /* InfoPlist.strings */; };
 		32C5355F1906A56C0093601C /* TDNotificationPanelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C5355E1906A56C0093601C /* TDNotificationPanelTests.m */; };
@@ -43,13 +44,14 @@
 
 /* Begin PBXFileReference section */
 		325636401906A75A00B60145 /* TDNotificationPanel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TDNotificationPanel-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		32890C5D19099F63003E5971 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		32890C5F19099F8B003E5971 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32C5353F1906A56C0093601C /* libTDNotificationPanel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTDNotificationPanel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		32C535421906A56C0093601C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32C535471906A56C0093601C /* TDNotificationPanel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDNotificationPanel.h; sourceTree = "<group>"; };
 		32C535491906A56C0093601C /* TDNotificationPanel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDNotificationPanel.m; sourceTree = "<group>"; };
 		32C5354F1906A56C0093601C /* TDNotificationPanelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TDNotificationPanelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		32C535501906A56C0093601C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		32C535531906A56C0093601C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		32C5355A1906A56C0093601C /* TDNotificationPanelTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TDNotificationPanelTests-Info.plist"; sourceTree = "<group>"; };
 		32C5355C1906A56C0093601C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		32C5355E1906A56C0093601C /* TDNotificationPanelTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TDNotificationPanelTests.m; sourceTree = "<group>"; };
@@ -60,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32890C6019099F8B003E5971 /* CoreGraphics.framework in Frameworks */,
+				32890C5E19099F63003E5971 /* UIKit.framework in Frameworks */,
 				32C535431906A56C0093601C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,7 +74,6 @@
 			files = (
 				32C535511906A56C0093601C /* XCTest.framework in Frameworks */,
 				32C535571906A56C0093601C /* libTDNotificationPanel.a in Frameworks */,
-				32C535541906A56C0093601C /* UIKit.framework in Frameworks */,
 				32C535521906A56C0093601C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,9 +103,10 @@
 		32C535411906A56C0093601C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				32890C5F19099F8B003E5971 /* CoreGraphics.framework */,
+				32890C5D19099F63003E5971 /* UIKit.framework */,
 				32C535421906A56C0093601C /* Foundation.framework */,
 				32C535501906A56C0093601C /* XCTest.framework */,
-				32C535531906A56C0093601C /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
