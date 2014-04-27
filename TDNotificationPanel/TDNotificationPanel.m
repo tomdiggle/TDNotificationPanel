@@ -64,11 +64,12 @@
             sizeWithFont:font constrainedToSize:maxSize lineBreakMode:mode] : CGSizeZero;
 #endif
 
+#define kTitleFontSize 14.f
+#define kSubtitleFontSize 12.f
+
 static const CGFloat kXPadding = 20.f;
 static const CGFloat kYPadding = 10.f;
 static const CGFloat kSpacing = 4.f;
-static const CGFloat kTitleFontSize = 14.f;
-static const CGFloat kSubtitleFontSize = 12.f;
 
 @interface TDNotificationPanel ()
 
