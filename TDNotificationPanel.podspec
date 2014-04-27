@@ -6,6 +6,7 @@ Pod::Spec.new do |s|
   s.screenshots  = "http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.jpg", "http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.jpg", "http://www.tomdiggle.com/assets/images/tdnotificationpanel-message.jpg", "http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar.jpg", "http://www.tomdiggle.com/assets/images/tdnotificationpanel-activityindicator.jpg" 
   s.license      = 'MIT'
   s.author       = { "Tom Diggle" => "tom@tomdiggle.com" }
+  s.social_media_url = "https://twitter.com/tomdiggle"
   s.source       = { :git => "https://github.com/tomdiggle/TDNotificationPanel.git", :tag => "0.5" }
   s.requires_arc = true
   s.platform     = :ios, '5.0'
