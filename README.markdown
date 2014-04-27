@@ -21,7 +21,7 @@ TDNotificationPanel has been tested on iOS 6+ and requires ARC. It depends on th
 ### CocoaPods
 [CocoaPods](http://cocoapods.org/) is the recommended way to add TDNotificationPanel to your project.
 
-1. Add a pod entry for TDNotificationPanel to your Podfile `pod 'TDNotificationPanel', '~> 0.5'`.
+1. Add a pod entry for TDNotificationPanel to your Podfile `pod 'TDNotificationPanel', '~> 0.5.1'`.
 2. Install the pod(s) by running pod install.
 3. Include TDNotificationPanel wherever you need it with `#import "TDNotificationPanel.h"`.
 

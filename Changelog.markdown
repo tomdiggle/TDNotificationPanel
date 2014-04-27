@@ -1,3 +1,11 @@
+### Version 0.5.1
+
+*Released on 27.04.2014*
+
+Fix iOS 6 compatibility
+
+Fix compiler warning
+
 ### Version 0.5
 
 *Released on 07.01.2014*
