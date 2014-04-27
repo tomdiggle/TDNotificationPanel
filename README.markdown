@@ -115,7 +115,7 @@ All notifications are added to a queue and displayed sequentially.
 
 ## License
 
-TDNotificationPanel is distributed under the [The MIT License](https://github.com/tomdiggle/tdnotificationpanel/blob/master/LICENSE).
+TDNotificationPanel is distributed under the [MIT License](https://github.com/tomdiggle/tdnotificationpanel/blob/master/LICENSE).
 
 ## Changelog
 Changelog can be viewed [here](https://github.com/tomdiggle/tdnotificationpanel/blob/master/Changelog.markdown).
