@@ -12,6 +12,9 @@ TDNotificationPanel is a drop in class that displays a notification which can co
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar.jpg)
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-activityindicator-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-activityindicator.jpg)
 
+## Important
+**Until version 1.0 expect changes to the API.**
+
 ## Requirements
 TDNotificationPanel has been tested on iOS 6+ and requires ARC. It depends on the following Apple frameworks:
 
