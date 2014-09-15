@@ -1,6 +1,9 @@
-[![Build Status](https://travis-ci.org/tomdiggle/TDNotificationPanel.svg?branch=master)](https://travis-ci.org/tomdiggle/TDNotificationPanel)
-
 # TDNotificationPanel
+[![Build Status](https://travis-ci.org/tomdiggle/TDNotificationPanel.svg?branch=master)](https://travis-ci.org/tomdiggle/TDNotificationPanel)
+[![Pod Version](http://img.shields.io/cocoapods/v/TDNotificationPanel.svg)](http://cocoadocs.org/docsets/TDNotificationPanel)
+[![Platform](http://img.shields.io/cocoapods/p/TDNotificationPanel.svg)](http://cocoadocs.org/docsets/TDNotificationPanel)
+[![License](http://img.shields.io/cocoapods/l/TDNotificationPanel.svg)](https://github.com/tomdiggle/tdnotificationpanel/blob/master/LICENSE)
+
 TDNotificationPanel is a drop in class that displays a notification which can contain a title, subtitle, icon, progress bar or activity indicator.
 
 [![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.jpg)
