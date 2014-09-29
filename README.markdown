@@ -6,11 +6,11 @@
 
 TDNotificationPanel is a drop in class that displays a notification which can contain a title, subtitle, icon, progress bar or activity indicator.
 
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-error.jpg)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-success.jpg)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-message-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-message.jpg)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-progressbar.jpg)
-[![](http://www.tomdiggle.com/assets/images/tdnotificationpanel-activityindicator-thumb.jpg)](http://www.tomdiggle.com/assets/images/tdnotificationpanel-activityindicator.jpg)
+[![](http://tomdiggle.com/assets/images/tdnotificationpanel-error-thumb.jpg)](http://tomdiggle.com/assets/images/tdnotificationpanel-error.jpg)
+[![](http://tomdiggle.com/assets/images/tdnotificationpanel-success-thumb.jpg)](http://tomdiggle.com/assets/images/tdnotificationpanel-success.jpg)
+[![](http://tomdiggle.com/assets/images/tdnotificationpanel-message-thumb.jpg)](http://tomdiggle.com/assets/images/tdnotificationpanel-message.jpg)
+[![](http://tomdiggle.com/assets/images/tdnotificationpanel-progressbar-thumb.jpg)](http://tomdiggle.com/assets/images/tdnotificationpanel-progressbar.jpg)
+[![](http://tomdiggle.com/assets/images/tdnotificationpanel-activityindicator-thumb.jpg)](http://tomdiggle.com/assets/images/tdnotificationpanel-activityindicator.jpg)
 
 ## Important
 **Until version 1.0 expect changes to the API.**
