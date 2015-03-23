@@ -1,3 +1,5 @@
 language: objective-c
 
-script: xcodebuild test -workspace TDNotificationPanel.xcworkspace -scheme TDNotificationPanel -sdk iphonesimulator7.1
+xcode_workspace: TDNotificationPanel.xcworkspace
+xcode_scheme: TDNotificationPanel
+xcode_sdk: iphonesimulator8.1
