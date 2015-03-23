@@ -460,8 +460,12 @@ static const CGFloat kSpacing = 4.f;
 - (void)positionElements
 {
     // Determine the total width of the notification.
-    CGSize size = { .width = self.bounds.size.width, .height = kYPadding };
-    
+	CGSize size = { .width = CGRectGetWidth(self.superview.bounds) ?: CGRectGetWidth(self.bounds), .height = kYPadding };
+
+	// update notification panel frame in case of rotation
+	CGRect rect = { .size = CGSizeMake(size.width, CGRectGetHeight(self.frame)), .origin = self.frame.origin };
+	self.frame = rect;
+	
     // Icon
     if ([_icon image])
     {
@@ -570,6 +574,13 @@ static const CGFloat kSpacing = 4.f;
     
     [self positionElements];
     self.frame = CGRectMake(0, 0, _totalSize.width, _totalSize.height);
+}
+
+#pragma - layout subviews
+- (void)layoutSubviews
+{
+	[super layoutSubviews];
+	[self positionElements];
 }
 
 @end
