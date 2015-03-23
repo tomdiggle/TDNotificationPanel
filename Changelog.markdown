@@ -1,3 +1,9 @@
+### Version 0.5.2
+
+*Released on 23.03.2015*
+
+Fix correctly resizes on device rotation (Thanks @antokne)
+
 ### Version 0.5.1
 
 *Released on 27.04.2014*

@@ -1,9 +1,9 @@
 // TDNotificationPanel.h
-// Version 0.5.1
+// Version 0.5.2
 // Created by Tom Diggle 08.02.2013
 
 /**
- * Copyright (c) 2013, Tom Diggle
+ * Copyright (c) 2013-2015, Tom Diggle
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the "Software"),
